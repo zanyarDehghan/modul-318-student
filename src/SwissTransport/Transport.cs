@@ -2,21 +2,39 @@
 using System.Net;
 using Newtonsoft.Json;
 
+
 namespace SwissTransport
 {
     public class Transport : ITransport
     {
-        public Stations GetStations(string query)
+        public Stations GetStations(string query, double x, double y)
         {
-            var request = CreateWebRequest("http://transport.opendata.ch/v1/locations?query=" + query);
+            string url = "";
+            if (query != "NULL")
+            {
+                 url = "http://transport.opendata.ch/v1/locations?query=" + query;
+            }
+            else
+            {
+                 url = "http://transport.opendata.ch/v1/locations?x=" + x +"&y="+y;
+            }
+            var request = CreateWebRequest(url);
             var response = request.GetResponse();
             var responseStream = response.GetResponseStream();
 
             if (responseStream != null)
             {
                 var message = new StreamReader(responseStream).ReadToEnd();
-                var stations = JsonConvert.DeserializeObject<Stations>(message);
-                return stations;
+                if (message != null)
+                {
+                    var stations = JsonConvert.DeserializeObject<Stations>(message);
+                    return stations;
+                }
+                else
+                {
+                    
+                }
+
             }
 
             return null;
