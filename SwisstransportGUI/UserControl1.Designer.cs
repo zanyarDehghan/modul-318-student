@@ -59,7 +59,6 @@
             this.txtHour = new System.Windows.Forms.NumericUpDown();
             this.txtMin = new System.Windows.Forms.NumericUpDown();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.btnDirection = new System.Windows.Forms.Button();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
             this.lblStation = new System.Windows.Forms.Label();
             this.txtStBoard = new System.Windows.Forms.TextBox();
@@ -70,8 +69,8 @@
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.btnEmail = new System.Windows.Forms.Button();
             this.pnlWeb = new System.Windows.Forms.Panel();
-            this.txtMail = new System.Windows.Forms.TextBox();
             this.lblNotifi = new System.Windows.Forms.Label();
+            this.txtMail = new System.Windows.Forms.TextBox();
             this.gBoxAdvSearch.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtHour)).BeginInit();
@@ -363,7 +362,7 @@
             // listResult
             // 
             this.listResult.FormattingEnabled = true;
-            this.listResult.Location = new System.Drawing.Point(-82, 451);
+            this.listResult.Location = new System.Drawing.Point(-93, 533);
             this.listResult.Name = "listResult";
             this.listResult.Size = new System.Drawing.Size(120, 95);
             this.listResult.TabIndex = 31;
@@ -385,7 +384,6 @@
             this.btnDtDec.TabIndex = 33;
             this.btnDtDec.Text = "<";
             this.btnDtDec.UseVisualStyleBackColor = true;
-            this.btnDtDec.Click += new System.EventHandler(this.btnDtDec_Click_1);
             // 
             // btnDtInc
             // 
@@ -431,21 +429,12 @@
             this.txtMin.Size = new System.Drawing.Size(43, 20);
             this.txtMin.TabIndex = 36;
             // 
-            // btnDirection
-            // 
-            this.btnDirection.Location = new System.Drawing.Point(307, 128);
-            this.btnDirection.Name = "btnDirection";
-            this.btnDirection.Size = new System.Drawing.Size(75, 23);
-            this.btnDirection.TabIndex = 38;
-            this.btnDirection.Text = "Wegzeiger";
-            this.btnDirection.UseVisualStyleBackColor = true;
-            // 
             // webBrowser1
             // 
             this.webBrowser1.Location = new System.Drawing.Point(389, 258);
             this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
             this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(461, 255);
+            this.webBrowser1.Size = new System.Drawing.Size(467, 255);
             this.webBrowser1.TabIndex = 41;
             // 
             // lblStation
@@ -467,12 +456,13 @@
             // btnRefresh
             // 
             this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.btnRefresh.Location = new System.Drawing.Point(307, 157);
+            this.btnRefresh.Location = new System.Drawing.Point(307, 129);
             this.btnRefresh.Name = "btnRefresh";
             this.btnRefresh.Size = new System.Drawing.Size(75, 22);
             this.btnRefresh.TabIndex = 44;
             this.btnRefresh.Text = "Aktualisieren";
             this.btnRefresh.UseVisualStyleBackColor = true;
+            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
             // 
             // tabClTxt
             // 
@@ -540,13 +530,6 @@
             this.pnlWeb.TabIndex = 52;
             this.pnlWeb.Visible = false;
             // 
-            // txtMail
-            // 
-            this.txtMail.Location = new System.Drawing.Point(166, 6);
-            this.txtMail.Name = "txtMail";
-            this.txtMail.Size = new System.Drawing.Size(215, 20);
-            this.txtMail.TabIndex = 52;
-            // 
             // lblNotifi
             // 
             this.lblNotifi.AutoSize = true;
@@ -554,6 +537,13 @@
             this.lblNotifi.Name = "lblNotifi";
             this.lblNotifi.Size = new System.Drawing.Size(0, 13);
             this.lblNotifi.TabIndex = 53;
+            // 
+            // txtMail
+            // 
+            this.txtMail.Location = new System.Drawing.Point(166, 6);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(215, 20);
+            this.txtMail.TabIndex = 52;
             // 
             // UserControl1
             // 
@@ -563,7 +553,6 @@
             this.Controls.Add(this.tabClTxt);
             this.Controls.Add(this.btnRefresh);
             this.Controls.Add(this.webBrowser1);
-            this.Controls.Add(this.btnDirection);
             this.Controls.Add(this.txtMin);
             this.Controls.Add(this.txtHour);
             this.Controls.Add(this.btnDtInc);
@@ -626,7 +615,6 @@
         private System.Windows.Forms.NumericUpDown txtHour;
         private System.Windows.Forms.NumericUpDown txtMin;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.Button btnDirection;
         private System.Windows.Forms.WebBrowser webBrowser1;
         private System.Windows.Forms.Label lblStation;
         private System.Windows.Forms.TextBox txtStBoard;

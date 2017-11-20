@@ -7,10 +7,6 @@ using System.Net.Sockets;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
 using Newtonsoft.Json;
 using System.Web;
@@ -49,6 +45,8 @@ namespace SwisstransportGUI
             txtHour.ValueChanged += params_FormChanged;
             txtMin.ValueChanged += params_FormChanged;
 
+            btnRefresh.Click+= params_FormChanged;
+
             rdBtnLimit.Click += params_FormChanged;
             rdBtnNoLimit.Click += params_FormChanged;
 
@@ -60,125 +58,93 @@ namespace SwisstransportGUI
                 }
             }
         }
-      
-        public void getMap()
-        {
-            string place="";
-            if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabConns"])
-            {
-                place = txtFrom.Text;
-            }
-            else if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabStBoard"])
-            {
-                place = txtStBoard.Text;
-            }
-            string ltLnGPS = getLatlnUseGPS();
-            string ltLnIP = getLocUseIP("ltLn");
 
-            if (place!="")
+        public void getStListe(string clName, double lat, double longt, string clText)
+        {
+
+            SwissTransport.Transport transport = new SwissTransport.Transport();
+            SwissTransport.Stations stList = new SwissTransport.Stations();
+
+            if (clName == "NULL")
             {
-                
-                SwissTransport.Transport trsp= new SwissTransport.Transport();
-                SwissTransport.Stations stLst = new SwissTransport.Stations();
-                stLst = trsp.GetStations(place, 0, 0);
-                SwissTransport.Station st = new SwissTransport.Station();
-                st = stLst.StationList[0];
-                
-                string cX = st.Coordinate.XCoordinate.ToString();
-                string cY = st.Coordinate.YCoordinate.ToString();
-                if(cX != "null" && cX != "null") {
-                    cX = cX.Replace(',', '.');
-                    cY = cY.Replace(',', '.');
-                    string XY = cX + "," + cY;
-                    browserView.Browser.LoadURL(Environment.CurrentDirectory+"/map.html?x="+cX+"&y="+cY);
-                }
-            }
-            else if(ltLnGPS != "NULL") 
-            {
-                browserView.Browser.LoadURL(Environment.CurrentDirectory + "/map.html?" + ltLnGPS);
-                //browserView.Browser.LoadURL("https://www.google.com/maps/?api=1&query="+latLong + "&zoom=12&basemap=road");
-            }else if(ltLnIP != "NULL")
-            {
-             
-                browserView.Browser.LoadURL(Environment.CurrentDirectory + "/map.html?" + ltLnIP);
+                stList = transport.GetStations("NULL", lat, longt);
             }
             else
             {
-                browserView.Browser.LoadURL("https://www.google.ch/maps/place/Luzern/@47.0548506,8.2122644,12z/data=!3m1!4b1!4m5!3m4!1s0x478ffa2a79547379:0xaef02ad1409952af!8m2!3d47.0501682!4d8.3093072?hl=de");
+                stList = transport.GetStations(clText, 0, 0);
             }
 
-        }
-        public string getLatlnUseGPS()
-        {
-            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
-            watcher.Start(); //started watcher
-            GeoCoordinate coord = watcher.Position.Location;
-            if (!watcher.Position.Location.IsUnknown)
+            listResult.Items.Clear();
+
+            int i = 0;
+            for (i = 0; i < stList.StationList.Count; i++)
             {
-                double lat = coord.Latitude; //latitude
-                double longt = coord.Longitude;  //logitude
-
-                return "x=" + lat.ToString() + "&y=" + longt.ToString();
+                listResult.Items.Add(stList.StationList[i].Name.ToString());
+                if (clText == stList.StationList[i].Name)
+                {
+                    listResult.SelectedItem = 0;
+                }
             }
-            else {
-                return "NULL";
-            }
-        }
-        public string GetInfo(string ipAddress)
-        {
-          return new WebClient().DownloadString("http://freegeoip.net/json/" + ipAddress);
-            
-        }
-        public string getLocUseIP(string which)
-        {
 
-           string IPAdr = new WebClient().DownloadString(@"http://icanhazip.com").Trim();
-            if (IPAdr != "" && IPAdr != "null")
+            listResult.BringToFront();
+        }
+
+        public string getParams()
+        {
+            string strDtTm = dtmDate.Value.ToString("yyyy-MM-dd");
+
+            strDtTm += " " + txtHour.Value + ":" + txtMin.Value;
+            string strParams = "&datetime=" + strDtTm;
+
+            string uncheck = "NULL";
+
+            foreach (Control c in gBoxAdvSearch.Controls)
             {
-                string jsonInfo = GetInfo(IPAdr);
-                var obj = JObject.Parse(jsonInfo);
-                var city = (string)obj["city"];
-                var lat = (string)obj["latitude"];
-                var longt = (string)obj["longitude"];
-                string latLong = "x=" + lat.ToString() + "&y=" + longt.ToString();
-                if (which == "city")
+                if ((c is CheckBox) && (((CheckBox)c).Tag == "childZug" || ((CheckBox)c).Tag == "anotherChb"))
                 {
-                    return city;
-                }else if(which=="ltLn") {
-                    return latLong;
-                }
-            }else {
-                return "NULL";
-            }
-            return null;
-        }
-        private void button1_Click(object sender, EventArgs e)
-        {
 
-            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
-            watcher.Start(); //started watcher
-            GeoCoordinate coord = watcher.Position.Location;
-            if (!watcher.Position.Location.IsUnknown)
+                    if (!((CheckBox)c).Checked)
+                    {
+
+                        uncheck = "needURL";
+                    }
+                    else if (((CheckBox)c).Checked)
+                    {
+
+
+                    }
+                }
+
+            }
+            if (uncheck == "needURL")
             {
-                double lat = coord.Latitude; //latitude
-                double longt = coord.Longitude;  //logitude
 
-                getStListe("NULL", lat, longt,"");
+                foreach (Control c in gBoxAdvSearch.Controls)
+                {
+                    if ((c is CheckBox) && (((CheckBox)c).Tag == "childZug" || ((CheckBox)c).Tag == "anotherChb"))
+                    {
+                        if (((CheckBox)c).Checked)
+                        {
+
+                            string strPrm = ((CheckBox)c).Name.Replace("chb", "");
+                            strParams += "&transportations[]=" + strPrm;
+
+                        }
+                    }
+
+                }
             }
-            else {
-                if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabStBoard"])
-                {
-                    txtStBoard.Text = getLocUseIP("city");
-                }
-                else if(tabClTxt.SelectedTab == tabClTxt.TabPages["tabConns"])
-                {
-                    txtFrom.Text = getLocUseIP("city");
-                }
-                    
-                getStListe("txtFrom", 0, 0,"");
-             }
+            if (chbBike.Checked)
+                strParams += "&bike=1";
+
+            if (rdBtnLimit.Checked)
+                strParams += "&accessibility=independent_boarding";
+
+
+            return strParams;
 
         }
+
 
         private void showConnections(string from, string to)
         {
@@ -199,11 +165,11 @@ namespace SwisstransportGUI
                 string platformNr = connListe.ConnectionList[i].From.Platform;
 
                 string journeyNr = "";
-                string journeyCat = "";
+                string journeyOp = "";
 
                 journeyNr = connListe.ConnectionList[0].Sections[0].Journey.Number;
-                journeyCat = connListe.ConnectionList[0].Sections[0].Journey.Category;
-                journeyCat += " "+ journeyNr;
+                journeyOp = connListe.ConnectionList[0].Sections[0].Journey.Operator;
+                journeyOp += " " + journeyNr;
             
                 
                 DurTm = DurTm.Substring(3, DurTm.Length - 3);
@@ -299,7 +265,7 @@ namespace SwisstransportGUI
                     delayMin = " ca. +"+ delay.ToString();
                 }
 
-                row2 = "<tr><td>" + DepTm + delayMin +"</td><td>" + ArrTm + "</td><td>" + DurTm + "</td><td>" + platformNr + "</td></td>" + "</td><td>" + journeyCat + "</td><td>" + Capacity + "</td></td>";
+                row2 = "<tr><td>" + DepTm + delayMin +"</td><td>" + ArrTm + "</td><td>" + DurTm + "</td><td>" + platformNr + "</td></td>" + "</td><td>" + journeyOp + "</td><td>" + Capacity + "</td></td>";
                 tblBody += row1 + row2;
 
                 string html =
@@ -311,99 +277,8 @@ namespace SwisstransportGUI
             }
         }
 
-        private void InputsListener(string clName)
-        {
-            string clText = "";
-            listResult.Visible = true;
-            listResult.Tag = clName;
 
-            foreach (TabPage t in tabClTxt.TabPages)
-            {
-                foreach (Control c in t.Controls)
-                {
-                    if (c.Name == clName)
-                    {
-                        clText = c.Text;
-                        listResult.Width = c.Width;
-                        listResult.Location = new Point(c.Location.X + 16, c.Location.Y + 113);
-                    }
-                }
-            }
 
-            if (clText != "" && !string.IsNullOrWhiteSpace(clText))
-            {
-                getStListe(clName, 0, 0, clText);
-            }
-            else
-            {
-                listResult.Visible = false;
-            }
-
-            if (txtFrom.Text.Length > 3 && txtTo.Text.Length > 3 && tabClTxt.SelectedTab == tabClTxt.TabPages["tabConns"])
-            {
-                showConnections(txtFrom.Text, txtTo.Text);
-            }
-
-            if (txtStBoard.Text.Length > 3 && tabClTxt.SelectedTab == tabClTxt.TabPages["tabStBoard"])
-            {
-                showStBoard(txtStBoard.Text);
-            }
-        }
-
-        public string getParams()
-        {
-            string strDtTm = dtmDate.Value.ToString("yyyy-MM-dd");
-
-            strDtTm += " " + txtHour.Value + ":" + txtMin.Value;
-            string strParams = "&datetime=" + strDtTm;
-
-            string uncheck = "NULL";
-
-                foreach (Control c in gBoxAdvSearch.Controls)
-                {
-                    if ((c is CheckBox) && (((CheckBox)c).Tag == "childZug" || ((CheckBox)c).Tag == "anotherChb"))
-                      {
-
-                        if (!((CheckBox)c).Checked) {
-
-                            uncheck = "needURL";
-                        }
-                        else if(((CheckBox)c).Checked)
-                         {
-                        
-                        
-                          }
-                    }
-
-                }
-                if (uncheck == "needURL")
-                    {
-                
-                foreach (Control c in gBoxAdvSearch.Controls)
-                    {
-                        if ((c is CheckBox) && (((CheckBox)c).Tag == "childZug" || ((CheckBox)c).Tag == "anotherChb"))
-                        {
-                            if (((CheckBox)c).Checked)
-                        {
-                           
-                                string strPrm = ((CheckBox)c).Name.Replace("chb", "");
-                                strParams += "&transportations[]=" + strPrm;
-                                
-                            }
-                        }
-
-                    }
-            }
-            if (chbBike.Checked)
-                strParams += "&bike=1";
-
-            if(rdBtnLimit.Checked)
-                strParams += "&accessibility=independent_boarding";
-
-            
-            return strParams;
-
-         }
 
         public void showStBoard(string clText)
         {
@@ -521,34 +396,44 @@ namespace SwisstransportGUI
 
         }
 
-        public void getStListe(string clName, double lat, double longt, string clText)
+        private void InputsListener(string clName)
         {
+            string clText = "";
+            listResult.Visible = true;
+            listResult.Tag = clName;
 
-            SwissTransport.Transport transport = new SwissTransport.Transport();
-            SwissTransport.Stations stList = new SwissTransport.Stations();
+            foreach (TabPage t in tabClTxt.TabPages)
+            {
+                foreach (Control c in t.Controls)
+                {
+                    if (c.Name == clName)
+                    {
+                        clText = c.Text;
+                        listResult.Width = c.Width;
+                        listResult.Location = new Point(c.Location.X + 16, c.Location.Y + 113);
+                    }
+                }
+            }
 
-            if (clName=="NULL") {
-                stList = transport.GetStations("NULL", lat, longt);
+            if (clText != "" && !string.IsNullOrWhiteSpace(clText))
+            {
+                getStListe(clName, 0, 0, clText);
             }
             else
             {
-                stList = transport.GetStations(clText, 0, 0);
-            }
-            
-            listResult.Items.Clear();
-
-            int i = 0;
-            for (i = 0; i < stList.StationList.Count; i++){
-                   listResult.Items.Add(stList.StationList[i].Name.ToString());
-                    if (clText == stList.StationList[i].Name)
-                    {
-                          listResult.SelectedItem = 0;
-                    }
+                listResult.Visible = false;
             }
 
-            listResult.BringToFront();
+            if (txtFrom.Text.Length > 3 && txtTo.Text.Length > 3 && tabClTxt.SelectedTab == tabClTxt.TabPages["tabConns"])
+            {
+                showConnections(txtFrom.Text, txtTo.Text);
+            }
+
+            if (txtStBoard.Text.Length > 3 && tabClTxt.SelectedTab == tabClTxt.TabPages["tabStBoard"])
+            {
+                showStBoard(txtStBoard.Text);
+            }
         }
-
         private void listResult_SelectedIndexChanged(object sender, EventArgs e)
         {
            
@@ -590,8 +475,11 @@ namespace SwisstransportGUI
         {
             InputsListener(((Control)sender).Name);
         }
+
+
         Decimal H_OldValue = 0;
         Decimal M_OldValue = 0;
+
         private void params_FormChanged(object sender, EventArgs e)
         {
            
@@ -677,44 +565,7 @@ namespace SwisstransportGUI
             }
         }
 
-        private void btnDtDec_Click_1(object sender, EventArgs e)
-        {
 
-        }
-
-        private void btnEmail_Click(object sender, EventArgs e)
-        {
-
-            try
-            {
-                var eMailValidator = new System.Net.Mail.MailAddress(txtMail.Text);
-
-                string fromEmail = "sbbtransport22@gmail.com";
-
-                MailMessage mailMessage = new MailMessage(fromEmail, txtMail.Text, "SBB Fahrplan", webBrowser2.DocumentText);
-                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
-                smtpClient.EnableSsl = true;
-                smtpClient.UseDefaultCredentials = false;
-                smtpClient.Credentials = new NetworkCredential(fromEmail, "sbb123456");
-                mailMessage.IsBodyHtml = true;
-                try
-                {
-                    smtpClient.Send(mailMessage);
-                    lblNotifi.Text = "Es wurde gesendet.";
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Es hat einen Fehler aufgetretten",ex.ToString());
-                    Console.Write(ex.Message);
-                }
-            }
-            catch (FormatException ex)
-            {
-                MessageBox.Show("Bitte korrigieren Sie die Email Adresse");
-            }
-            
-
-        }
 
         private void btnReset_Click(object sender, EventArgs e)
         {
@@ -751,5 +602,172 @@ namespace SwisstransportGUI
             string strMin = DateTime.Now.ToString("mm");
             txtMin.Text = strMin;
         }
+
+        public void getMap()
+        {
+            string place = "";
+            if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabConns"])
+            {
+                place = txtFrom.Text;
+            }
+            else if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabStBoard"])
+            {
+                place = txtStBoard.Text;
+            }
+            string ltLnGPS = getLatlnUseGPS();
+            string ltLnIP = getLocUseIP("ltLn");
+
+            if (place != "")
+            {
+
+                SwissTransport.Transport trsp = new SwissTransport.Transport();
+                SwissTransport.Stations stLst = new SwissTransport.Stations();
+                stLst = trsp.GetStations(place, 0, 0);
+                SwissTransport.Station st = new SwissTransport.Station();
+                st = stLst.StationList[0];
+
+                string cX = st.Coordinate.XCoordinate.ToString();
+                string cY = st.Coordinate.YCoordinate.ToString();
+                if (cX != "null" && cX != "null")
+                {
+                    cX = cX.Replace(',', '.');
+                    cY = cY.Replace(',', '.');
+                    string XY = cX + "," + cY;
+                    browserView.Browser.LoadURL(Environment.CurrentDirectory + "/map.html?x=" + cX + "&y=" + cY);
+                }
+            }
+            else if (ltLnGPS != "NULL")
+            {
+                browserView.Browser.LoadURL(Environment.CurrentDirectory + "/map.html?" + ltLnGPS);
+                //browserView.Browser.LoadURL("https://www.google.com/maps/?api=1&query="+latLong + "&zoom=12&basemap=road");
+            }
+            else if (ltLnIP != "NULL")
+            {
+
+                browserView.Browser.LoadURL(Environment.CurrentDirectory + "/map.html?" + ltLnIP);
+            }
+            else
+            {
+                browserView.Browser.LoadURL("https://www.google.ch/maps/place/Luzern/@47.0548506,8.2122644,12z/data=!3m1!4b1!4m5!3m4!1s0x478ffa2a79547379:0xaef02ad1409952af!8m2!3d47.0501682!4d8.3093072?hl=de");
+            }
+
+        }
+        public string getLatlnUseGPS()
+        {
+            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
+            watcher.Start(); //started watcher
+            GeoCoordinate coord = watcher.Position.Location;
+            if (!watcher.Position.Location.IsUnknown)
+            {
+                double lat = coord.Latitude; //latitude
+                double longt = coord.Longitude;  //logitude
+
+                return "x=" + lat.ToString() + "&y=" + longt.ToString();
+            }
+            else
+            {
+                return "NULL";
+            }
+        }
+        public string GetInfo(string ipAddress)
+        {
+            return new WebClient().DownloadString("http://freegeoip.net/json/" + ipAddress);
+
+        }
+        public string getLocUseIP(string which)
+        {
+
+            string IPAdr = new WebClient().DownloadString(@"http://icanhazip.com").Trim();
+            if (IPAdr != "" && IPAdr != "null")
+            {
+                string jsonInfo = GetInfo(IPAdr);
+                var obj = JObject.Parse(jsonInfo);
+                var city = (string)obj["city"];
+                var lat = (string)obj["latitude"];
+                var longt = (string)obj["longitude"];
+                string latLong = "x=" + lat.ToString() + "&y=" + longt.ToString();
+                if (which == "city")
+                {
+                    return city;
+                }
+                else if (which == "ltLn")
+                {
+                    return latLong;
+                }
+            }
+            else
+            {
+                return "NULL";
+            }
+            return null;
+        }
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+            GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
+            watcher.Start(); //started watcher
+            GeoCoordinate coord = watcher.Position.Location;
+            if (!watcher.Position.Location.IsUnknown)
+            {
+                double lat = coord.Latitude; //latitude
+                double longt = coord.Longitude;  //logitude
+
+                getStListe("NULL", lat, longt, "");
+            }
+            else
+            {
+                if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabStBoard"])
+                {
+                    txtStBoard.Text = getLocUseIP("city");
+                }
+                else if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabConns"])
+                {
+
+                    txtFrom.Text = getLocUseIP("city");
+                }
+
+                getStListe("txtFrom", 0, 0, "");
+            }
+
+        }
+        private void btnEmail_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var eMailValidator = new System.Net.Mail.MailAddress(txtMail.Text);
+
+                string fromEmail = "sbbtransport22@gmail.com";
+
+                MailMessage mailMessage = new MailMessage(fromEmail, txtMail.Text, "SBB Fahrplan", webBrowser2.DocumentText);
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(fromEmail, "sbb123456");
+                mailMessage.IsBodyHtml = true;
+                try
+                {
+                    smtpClient.Send(mailMessage);
+                    lblNotifi.Text = "Es wurde gesendet.";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Es hat einen Fehler aufgetretten", ex.ToString());
+                    Console.Write(ex.Message);
+                }
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Bitte korrigieren Sie die Email Adresse");
+            }
+
+
+        }
+
+        private void btnRefresh_Click(object sender, EventArgs e)
+        {
+
+        }
     }
+
 }
