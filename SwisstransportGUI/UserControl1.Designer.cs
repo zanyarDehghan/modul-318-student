@@ -70,6 +70,8 @@
             this.webBrowser2 = new System.Windows.Forms.WebBrowser();
             this.btnEmail = new System.Windows.Forms.Button();
             this.pnlWeb = new System.Windows.Forms.Panel();
+            this.txtMail = new System.Windows.Forms.TextBox();
+            this.lblNotifi = new System.Windows.Forms.Label();
             this.gBoxAdvSearch.SuspendLayout();
             this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.txtHour)).BeginInit();
@@ -88,6 +90,7 @@
             this.btnReset.TabIndex = 16;
             this.btnReset.Text = "Zurücksetzen";
             this.btnReset.UseVisualStyleBackColor = true;
+            this.btnReset.Click += new System.EventHandler(this.btnReset_Click);
             // 
             // gBoxAdvSearch
             // 
@@ -523,9 +526,12 @@
             this.btnEmail.TabIndex = 51;
             this.btnEmail.Text = "Email";
             this.btnEmail.UseVisualStyleBackColor = true;
+            this.btnEmail.Click += new System.EventHandler(this.btnEmail_Click);
             // 
             // pnlWeb
             // 
+            this.pnlWeb.Controls.Add(this.lblNotifi);
+            this.pnlWeb.Controls.Add(this.txtMail);
             this.pnlWeb.Controls.Add(this.btnEmail);
             this.pnlWeb.Controls.Add(this.webBrowser2);
             this.pnlWeb.Location = new System.Drawing.Point(389, 28);
@@ -533,6 +539,21 @@
             this.pnlWeb.Size = new System.Drawing.Size(467, 221);
             this.pnlWeb.TabIndex = 52;
             this.pnlWeb.Visible = false;
+            // 
+            // txtMail
+            // 
+            this.txtMail.Location = new System.Drawing.Point(166, 6);
+            this.txtMail.Name = "txtMail";
+            this.txtMail.Size = new System.Drawing.Size(215, 20);
+            this.txtMail.TabIndex = 52;
+            // 
+            // lblNotifi
+            // 
+            this.lblNotifi.AutoSize = true;
+            this.lblNotifi.Location = new System.Drawing.Point(4, 12);
+            this.lblNotifi.Name = "lblNotifi";
+            this.lblNotifi.Size = new System.Drawing.Size(0, 13);
+            this.lblNotifi.TabIndex = 53;
             // 
             // UserControl1
             // 
@@ -567,6 +588,7 @@
             this.tabStBoard.ResumeLayout(false);
             this.tabStBoard.PerformLayout();
             this.pnlWeb.ResumeLayout(false);
+            this.pnlWeb.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -615,5 +637,7 @@
         private System.Windows.Forms.WebBrowser webBrowser2;
         private System.Windows.Forms.Button btnEmail;
         private System.Windows.Forms.Panel pnlWeb;
+        private System.Windows.Forms.TextBox txtMail;
+        private System.Windows.Forms.Label lblNotifi;
     }
 }

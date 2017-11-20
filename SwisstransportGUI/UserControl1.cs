@@ -18,6 +18,8 @@ using Newtonsoft.Json.Linq;
 using DotNetBrowser;
 using DotNetBrowser.WinForms;
 
+using System.Net.Mail;
+
 namespace SwisstransportGUI
 {
 
@@ -678,6 +680,76 @@ namespace SwisstransportGUI
         private void btnDtDec_Click_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnEmail_Click(object sender, EventArgs e)
+        {
+
+            try
+            {
+                var eMailValidator = new System.Net.Mail.MailAddress(txtMail.Text);
+
+                string fromEmail = "sbbtransport22@gmail.com";
+
+                MailMessage mailMessage = new MailMessage(fromEmail, txtMail.Text, "SBB Fahrplan", webBrowser2.DocumentText);
+                SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
+                smtpClient.EnableSsl = true;
+                smtpClient.UseDefaultCredentials = false;
+                smtpClient.Credentials = new NetworkCredential(fromEmail, "sbb123456");
+                mailMessage.IsBodyHtml = true;
+                try
+                {
+                    smtpClient.Send(mailMessage);
+                    lblNotifi.Text = "Es wurde gesendet.";
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Es hat einen Fehler aufgetretten",ex.ToString());
+                    Console.Write(ex.Message);
+                }
+            }
+            catch (FormatException ex)
+            {
+                MessageBox.Show("Bitte korrigieren Sie die Email Adresse");
+            }
+            
+
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            foreach (Control c in gBoxAdvSearch.Controls)
+            {
+                if ((c is CheckBox) || (c is RadioButton))
+                {
+                    ((CheckBox)c).Checked = true;
+                    
+                }
+
+            }
+
+            foreach (TabPage t in tabClTxt.TabPages)
+            {
+                foreach (Control c in t.Controls)
+                {
+                    if (c is TextBox || c is RichTextBox)
+                    {
+                        c.Text = "";
+                    }
+                }
+            }
+            rdBtnNoLimit.Checked = true;
+            chbBike.Checked = false;
+
+            dtmDate.Format = DateTimePickerFormat.Custom;
+            dtmDate.Value = DateTime.Now.Date;
+            dtmDate.CustomFormat = "dd.MM.yyyy";
+
+            int intHour = int.Parse(DateTime.Now.ToString("HH"));
+            txtHour.Text = intHour.ToString("00");
+
+            string strMin = DateTime.Now.ToString("mm");
+            txtMin.Text = strMin;
         }
     }
 }
