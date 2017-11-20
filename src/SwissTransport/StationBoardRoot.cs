@@ -21,7 +21,7 @@ namespace SwissTransport
         [JsonProperty("category")]
         public string Category { get; set; }
 
-        [JsonProperty("Number")]
+        [JsonProperty("number")]
         public string Number { get; set; }
 
         [JsonProperty("to")]
@@ -34,9 +34,4 @@ namespace SwissTransport
         public Stop Stop { get; set; }
     }
 
-    public class Stop
-    {
-        [JsonProperty("departure")]
-        public DateTime Departure { get; set; }
-    }
 }

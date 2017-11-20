@@ -28,27 +28,23 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.btnRefresh = new System.Windows.Forms.Button();
             this.btnReset = new System.Windows.Forms.Button();
-            this.groupBox3 = new System.Windows.Forms.GroupBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.chbSSnR = new System.Windows.Forms.CheckBox();
+            this.gBoxAdvSearch = new System.Windows.Forms.GroupBox();
+            this.chbS_sn_r = new System.Windows.Forms.CheckBox();
             this.chbIr = new System.Windows.Forms.CheckBox();
-            this.chbEcIc = new System.Windows.Forms.CheckBox();
-            this.chbICE = new System.Windows.Forms.CheckBox();
-            this.chbAutoExt = new System.Windows.Forms.CheckBox();
-            this.chbZug = new System.Windows.Forms.CheckBox();
             this.groupBox2 = new System.Windows.Forms.GroupBox();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rdBtnLimit = new System.Windows.Forms.RadioButton();
             this.rdBtnNoLimit = new System.Windows.Forms.RadioButton();
-            this.lblBarrier = new System.Windows.Forms.Label();
-            this.chbSchiff = new System.Windows.Forms.CheckBox();
-            this.chbSeilbahn = new System.Windows.Forms.CheckBox();
-            this.chbVelo = new System.Windows.Forms.CheckBox();
+            this.chbEc_ic = new System.Windows.Forms.CheckBox();
+            this.chbShip = new System.Windows.Forms.CheckBox();
+            this.chbIce_tgv_rj = new System.Windows.Forms.CheckBox();
+            this.chbCableway = new System.Windows.Forms.CheckBox();
+            this.chbArz_ext = new System.Windows.Forms.CheckBox();
+            this.chbBike = new System.Windows.Forms.CheckBox();
+            this.chbZug = new System.Windows.Forms.CheckBox();
             this.lblVia = new System.Windows.Forms.Label();
-            this.chbTram = new System.Windows.Forms.CheckBox();
+            this.chbTramway_underground = new System.Windows.Forms.CheckBox();
             this.chbBus = new System.Windows.Forms.CheckBox();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
             this.btnNearst = new System.Windows.Forms.Button();
             this.btnMap = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
@@ -58,165 +54,116 @@
             this.txtFrom = new System.Windows.Forms.TextBox();
             this.listResult = new System.Windows.Forms.ListBox();
             this.dtmDate = new System.Windows.Forms.DateTimePicker();
-            this.txtTime = new System.Windows.Forms.TextBox();
-            this.btnDtInc = new System.Windows.Forms.Button();
             this.btnDtDec = new System.Windows.Forms.Button();
-            this.groupBox3.SuspendLayout();
-            this.groupBox1.SuspendLayout();
+            this.btnDtInc = new System.Windows.Forms.Button();
+            this.txtHour = new System.Windows.Forms.NumericUpDown();
+            this.txtMin = new System.Windows.Forms.NumericUpDown();
+            this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
+            this.btnDirection = new System.Windows.Forms.Button();
+            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.lblStation = new System.Windows.Forms.Label();
+            this.txtStBoard = new System.Windows.Forms.TextBox();
+            this.btnRefresh = new System.Windows.Forms.Button();
+            this.tabClTxt = new System.Windows.Forms.TabControl();
+            this.tabConns = new System.Windows.Forms.TabPage();
+            this.tabStBoard = new System.Windows.Forms.TabPage();
+            this.webBrowser2 = new System.Windows.Forms.WebBrowser();
+            this.btnEmail = new System.Windows.Forms.Button();
+            this.pnlWeb = new System.Windows.Forms.Panel();
+            this.gBoxAdvSearch.SuspendLayout();
             this.groupBox2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtHour)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMin)).BeginInit();
+            this.tabClTxt.SuspendLayout();
+            this.tabConns.SuspendLayout();
+            this.tabStBoard.SuspendLayout();
+            this.pnlWeb.SuspendLayout();
             this.SuspendLayout();
-            // 
-            // btnRefresh
-            // 
-            this.btnRefresh.Location = new System.Drawing.Point(307, 118);
-            this.btnRefresh.Name = "btnRefresh";
-            this.btnRefresh.Size = new System.Drawing.Size(75, 23);
-            this.btnRefresh.TabIndex = 30;
-            this.btnRefresh.Text = "Aktualisieren";
-            this.btnRefresh.UseVisualStyleBackColor = true;
             // 
             // btnReset
             // 
-            this.btnReset.Location = new System.Drawing.Point(18, 384);
+            this.btnReset.Location = new System.Drawing.Point(6, 304);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(103, 23);
             this.btnReset.TabIndex = 16;
             this.btnReset.Text = "Zurücksetzen";
             this.btnReset.UseVisualStyleBackColor = true;
             // 
-            // groupBox3
+            // gBoxAdvSearch
             // 
-            this.groupBox3.Controls.Add(this.btnReset);
-            this.groupBox3.Controls.Add(this.groupBox1);
-            this.groupBox3.Controls.Add(this.groupBox2);
-            this.groupBox3.Controls.Add(this.chbSchiff);
-            this.groupBox3.Controls.Add(this.chbSeilbahn);
-            this.groupBox3.Controls.Add(this.chbVelo);
-            this.groupBox3.Controls.Add(this.lblVia);
-            this.groupBox3.Controls.Add(this.chbTram);
-            this.groupBox3.Controls.Add(this.chbBus);
-            this.groupBox3.Location = new System.Drawing.Point(39, 190);
-            this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Size = new System.Drawing.Size(266, 418);
-            this.groupBox3.TabIndex = 28;
-            this.groupBox3.TabStop = false;
-            this.groupBox3.Text = "Ertweiterte Suche";
+            this.gBoxAdvSearch.Controls.Add(this.chbS_sn_r);
+            this.gBoxAdvSearch.Controls.Add(this.btnReset);
+            this.gBoxAdvSearch.Controls.Add(this.chbIr);
+            this.gBoxAdvSearch.Controls.Add(this.groupBox2);
+            this.gBoxAdvSearch.Controls.Add(this.chbEc_ic);
+            this.gBoxAdvSearch.Controls.Add(this.chbShip);
+            this.gBoxAdvSearch.Controls.Add(this.chbIce_tgv_rj);
+            this.gBoxAdvSearch.Controls.Add(this.chbCableway);
+            this.gBoxAdvSearch.Controls.Add(this.chbArz_ext);
+            this.gBoxAdvSearch.Controls.Add(this.chbBike);
+            this.gBoxAdvSearch.Controls.Add(this.chbZug);
+            this.gBoxAdvSearch.Controls.Add(this.lblVia);
+            this.gBoxAdvSearch.Controls.Add(this.chbTramway_underground);
+            this.gBoxAdvSearch.Controls.Add(this.chbBus);
+            this.gBoxAdvSearch.Location = new System.Drawing.Point(33, 203);
+            this.gBoxAdvSearch.Name = "gBoxAdvSearch";
+            this.gBoxAdvSearch.Size = new System.Drawing.Size(266, 333);
+            this.gBoxAdvSearch.TabIndex = 28;
+            this.gBoxAdvSearch.TabStop = false;
+            this.gBoxAdvSearch.Text = "Ertweiterte Suche";
             // 
-            // groupBox1
+            // chbS_sn_r
             // 
-            this.groupBox1.Controls.Add(this.chbSSnR);
-            this.groupBox1.Controls.Add(this.chbIr);
-            this.groupBox1.Controls.Add(this.chbEcIc);
-            this.groupBox1.Controls.Add(this.chbICE);
-            this.groupBox1.Controls.Add(this.chbAutoExt);
-            this.groupBox1.Controls.Add(this.chbZug);
-            this.groupBox1.Location = new System.Drawing.Point(24, 45);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(150, 175);
-            this.groupBox1.TabIndex = 7;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "groupBox1";
-            // 
-            // chbSSnR
-            // 
-            this.chbSSnR.AutoSize = true;
-            this.chbSSnR.Checked = true;
-            this.chbSSnR.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbSSnR.Location = new System.Drawing.Point(19, 112);
-            this.chbSSnR.Name = "chbSSnR";
-            this.chbSSnR.Size = new System.Drawing.Size(66, 17);
-            this.chbSSnR.TabIndex = 5;
-            this.chbSSnR.Text = "S/SN/R";
-            this.chbSSnR.UseVisualStyleBackColor = true;
+            this.chbS_sn_r.AutoSize = true;
+            this.chbS_sn_r.Checked = true;
+            this.chbS_sn_r.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbS_sn_r.Location = new System.Drawing.Point(40, 121);
+            this.chbS_sn_r.Name = "chbS_sn_r";
+            this.chbS_sn_r.Size = new System.Drawing.Size(66, 17);
+            this.chbS_sn_r.TabIndex = 5;
+            this.chbS_sn_r.Tag = "childZug";
+            this.chbS_sn_r.Text = "S/SN/R";
+            this.chbS_sn_r.UseVisualStyleBackColor = true;
             // 
             // chbIr
             // 
             this.chbIr.AutoSize = true;
             this.chbIr.Checked = true;
             this.chbIr.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbIr.Location = new System.Drawing.Point(19, 89);
+            this.chbIr.Location = new System.Drawing.Point(40, 98);
             this.chbIr.Name = "chbIr";
             this.chbIr.Size = new System.Drawing.Size(37, 17);
             this.chbIr.TabIndex = 4;
+            this.chbIr.Tag = "childZug";
             this.chbIr.Text = "IR";
             this.chbIr.UseVisualStyleBackColor = true;
             // 
-            // chbEcIc
-            // 
-            this.chbEcIc.AutoSize = true;
-            this.chbEcIc.Checked = true;
-            this.chbEcIc.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbEcIc.Location = new System.Drawing.Point(19, 66);
-            this.chbEcIc.Name = "chbEcIc";
-            this.chbEcIc.Size = new System.Drawing.Size(55, 17);
-            this.chbEcIc.TabIndex = 3;
-            this.chbEcIc.Text = "EC/IC";
-            this.chbEcIc.UseVisualStyleBackColor = true;
-            // 
-            // chbICE
-            // 
-            this.chbICE.AutoSize = true;
-            this.chbICE.Checked = true;
-            this.chbICE.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbICE.Location = new System.Drawing.Point(19, 43);
-            this.chbICE.Name = "chbICE";
-            this.chbICE.Size = new System.Drawing.Size(88, 17);
-            this.chbICE.TabIndex = 2;
-            this.chbICE.Text = "ICE/TGV/RJ";
-            this.chbICE.UseVisualStyleBackColor = true;
-            // 
-            // chbAutoExt
-            // 
-            this.chbAutoExt.AutoSize = true;
-            this.chbAutoExt.Checked = true;
-            this.chbAutoExt.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbAutoExt.Location = new System.Drawing.Point(19, 135);
-            this.chbAutoExt.Name = "chbAutoExt";
-            this.chbAutoExt.Size = new System.Drawing.Size(116, 17);
-            this.chbAutoExt.TabIndex = 1;
-            this.chbAutoExt.Text = "Autoreise/Extrazug";
-            this.chbAutoExt.UseVisualStyleBackColor = true;
-            // 
-            // chbZug
-            // 
-            this.chbZug.AutoSize = true;
-            this.chbZug.Checked = true;
-            this.chbZug.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbZug.Location = new System.Drawing.Point(7, 20);
-            this.chbZug.Name = "chbZug";
-            this.chbZug.Size = new System.Drawing.Size(45, 17);
-            this.chbZug.TabIndex = 0;
-            this.chbZug.Text = "Zug";
-            this.chbZug.UseVisualStyleBackColor = true;
-            // 
             // groupBox2
             // 
-            this.groupBox2.Controls.Add(this.radioButton1);
+            this.groupBox2.Controls.Add(this.rdBtnLimit);
             this.groupBox2.Controls.Add(this.rdBtnNoLimit);
-            this.groupBox2.Controls.Add(this.lblBarrier);
-            this.groupBox2.Location = new System.Drawing.Point(12, 262);
+            this.groupBox2.Location = new System.Drawing.Point(6, 204);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(200, 100);
+            this.groupBox2.Size = new System.Drawing.Size(200, 84);
             this.groupBox2.TabIndex = 15;
             this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "groupBox2";
+            this.groupBox2.Text = "Barrierefreie Verbindung";
             // 
-            // radioButton1
+            // rdBtnLimit
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(19, 67);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(113, 17);
-            this.radioButton1.TabIndex = 16;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Mit Einschränkung";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rdBtnLimit.AutoSize = true;
+            this.rdBtnLimit.Location = new System.Drawing.Point(16, 51);
+            this.rdBtnLimit.Name = "rdBtnLimit";
+            this.rdBtnLimit.Size = new System.Drawing.Size(113, 17);
+            this.rdBtnLimit.TabIndex = 16;
+            this.rdBtnLimit.Text = "Mit Einschränkung";
+            this.rdBtnLimit.UseVisualStyleBackColor = true;
             // 
             // rdBtnNoLimit
             // 
             this.rdBtnNoLimit.AutoSize = true;
-            this.rdBtnNoLimit.Location = new System.Drawing.Point(19, 44);
+            this.rdBtnNoLimit.Checked = true;
+            this.rdBtnNoLimit.Location = new System.Drawing.Point(16, 28);
             this.rdBtnNoLimit.Name = "rdBtnNoLimit";
             this.rdBtnNoLimit.Size = new System.Drawing.Size(126, 17);
             this.rdBtnNoLimit.TabIndex = 15;
@@ -224,93 +171,132 @@
             this.rdBtnNoLimit.Text = "Keine Einschränkung";
             this.rdBtnNoLimit.UseVisualStyleBackColor = true;
             // 
-            // lblBarrier
+            // chbEc_ic
             // 
-            this.lblBarrier.AutoSize = true;
-            this.lblBarrier.Location = new System.Drawing.Point(6, 16);
-            this.lblBarrier.Name = "lblBarrier";
-            this.lblBarrier.Size = new System.Drawing.Size(120, 13);
-            this.lblBarrier.TabIndex = 14;
-            this.lblBarrier.Text = "Barrierefreie Verbindung";
+            this.chbEc_ic.AutoSize = true;
+            this.chbEc_ic.Checked = true;
+            this.chbEc_ic.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbEc_ic.Location = new System.Drawing.Point(40, 75);
+            this.chbEc_ic.Name = "chbEc_ic";
+            this.chbEc_ic.Size = new System.Drawing.Size(55, 17);
+            this.chbEc_ic.TabIndex = 3;
+            this.chbEc_ic.Tag = "childZug";
+            this.chbEc_ic.Text = "EC/IC";
+            this.chbEc_ic.UseVisualStyleBackColor = true;
             // 
-            // chbSchiff
+            // chbShip
             // 
-            this.chbSchiff.AutoSize = true;
-            this.chbSchiff.Checked = true;
-            this.chbSchiff.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbSchiff.Location = new System.Drawing.Point(180, 88);
-            this.chbSchiff.Name = "chbSchiff";
-            this.chbSchiff.Size = new System.Drawing.Size(53, 17);
-            this.chbSchiff.TabIndex = 6;
-            this.chbSchiff.Text = "Schiff";
-            this.chbSchiff.UseVisualStyleBackColor = true;
+            this.chbShip.AutoSize = true;
+            this.chbShip.Checked = true;
+            this.chbShip.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbShip.Location = new System.Drawing.Point(173, 62);
+            this.chbShip.Name = "chbShip";
+            this.chbShip.Size = new System.Drawing.Size(53, 17);
+            this.chbShip.TabIndex = 6;
+            this.chbShip.Tag = "anotherChb";
+            this.chbShip.Text = "Schiff";
+            this.chbShip.UseVisualStyleBackColor = true;
             // 
-            // chbSeilbahn
+            // chbIce_tgv_rj
             // 
-            this.chbSeilbahn.AutoSize = true;
-            this.chbSeilbahn.Checked = true;
-            this.chbSeilbahn.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbSeilbahn.Location = new System.Drawing.Point(180, 111);
-            this.chbSeilbahn.Name = "chbSeilbahn";
-            this.chbSeilbahn.Size = new System.Drawing.Size(67, 17);
-            this.chbSeilbahn.TabIndex = 7;
-            this.chbSeilbahn.Text = "Seilbahn";
-            this.chbSeilbahn.UseVisualStyleBackColor = true;
+            this.chbIce_tgv_rj.AutoSize = true;
+            this.chbIce_tgv_rj.Checked = true;
+            this.chbIce_tgv_rj.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbIce_tgv_rj.Location = new System.Drawing.Point(40, 52);
+            this.chbIce_tgv_rj.Name = "chbIce_tgv_rj";
+            this.chbIce_tgv_rj.Size = new System.Drawing.Size(88, 17);
+            this.chbIce_tgv_rj.TabIndex = 2;
+            this.chbIce_tgv_rj.Tag = "childZug";
+            this.chbIce_tgv_rj.Text = "ICE/TGV/RJ";
+            this.chbIce_tgv_rj.UseVisualStyleBackColor = true;
             // 
-            // chbVelo
+            // chbCableway
             // 
-            this.chbVelo.AutoSize = true;
-            this.chbVelo.Location = new System.Drawing.Point(18, 226);
-            this.chbVelo.Name = "chbVelo";
-            this.chbVelo.Size = new System.Drawing.Size(141, 17);
-            this.chbVelo.TabIndex = 11;
-            this.chbVelo.Text = "Velomitnahme (Schweiz)";
-            this.chbVelo.UseVisualStyleBackColor = true;
+            this.chbCableway.AutoSize = true;
+            this.chbCableway.Checked = true;
+            this.chbCableway.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbCableway.Location = new System.Drawing.Point(173, 85);
+            this.chbCableway.Name = "chbCableway";
+            this.chbCableway.Size = new System.Drawing.Size(67, 17);
+            this.chbCableway.TabIndex = 7;
+            this.chbCableway.Tag = "anotherChb";
+            this.chbCableway.Text = "Seilbahn";
+            this.chbCableway.UseVisualStyleBackColor = true;
+            // 
+            // chbArz_ext
+            // 
+            this.chbArz_ext.AutoSize = true;
+            this.chbArz_ext.Checked = true;
+            this.chbArz_ext.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbArz_ext.Location = new System.Drawing.Point(40, 144);
+            this.chbArz_ext.Name = "chbArz_ext";
+            this.chbArz_ext.Size = new System.Drawing.Size(116, 17);
+            this.chbArz_ext.TabIndex = 1;
+            this.chbArz_ext.Tag = "childZug";
+            this.chbArz_ext.Text = "Autoreise/Extrazug";
+            this.chbArz_ext.UseVisualStyleBackColor = true;
+            // 
+            // chbBike
+            // 
+            this.chbBike.AutoSize = true;
+            this.chbBike.Location = new System.Drawing.Point(12, 181);
+            this.chbBike.Name = "chbBike";
+            this.chbBike.Size = new System.Drawing.Size(141, 17);
+            this.chbBike.TabIndex = 11;
+            this.chbBike.Tag = "";
+            this.chbBike.Text = "Velomitnahme (Schweiz)";
+            this.chbBike.UseVisualStyleBackColor = true;
+            // 
+            // chbZug
+            // 
+            this.chbZug.AutoSize = true;
+            this.chbZug.Checked = true;
+            this.chbZug.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbZug.Location = new System.Drawing.Point(28, 29);
+            this.chbZug.Name = "chbZug";
+            this.chbZug.Size = new System.Drawing.Size(45, 17);
+            this.chbZug.TabIndex = 0;
+            this.chbZug.Text = "Zug";
+            this.chbZug.UseVisualStyleBackColor = true;
+            this.chbZug.CheckedChanged += new System.EventHandler(this.chbZug_CheckedChanged);
             // 
             // lblVia
             // 
             this.lblVia.AutoSize = true;
             this.lblVia.Location = new System.Drawing.Point(9, 29);
             this.lblVia.Name = "lblVia";
-            this.lblVia.Size = new System.Drawing.Size(76, 13);
+            this.lblVia.Size = new System.Drawing.Size(0, 13);
             this.lblVia.TabIndex = 6;
-            this.lblVia.Text = "Verkehrsmittel:";
             // 
-            // chbTram
+            // chbTramway_underground
             // 
-            this.chbTram.AutoSize = true;
-            this.chbTram.Checked = true;
-            this.chbTram.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbTram.Location = new System.Drawing.Point(180, 134);
-            this.chbTram.Name = "chbTram";
-            this.chbTram.Size = new System.Drawing.Size(82, 17);
-            this.chbTram.TabIndex = 8;
-            this.chbTram.Text = "Tram/Metro";
-            this.chbTram.UseVisualStyleBackColor = true;
+            this.chbTramway_underground.AutoSize = true;
+            this.chbTramway_underground.Checked = true;
+            this.chbTramway_underground.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.chbTramway_underground.Location = new System.Drawing.Point(173, 108);
+            this.chbTramway_underground.Name = "chbTramway_underground";
+            this.chbTramway_underground.Size = new System.Drawing.Size(82, 17);
+            this.chbTramway_underground.TabIndex = 8;
+            this.chbTramway_underground.Tag = "anotherChb";
+            this.chbTramway_underground.Text = "Tram/Metro";
+            this.chbTramway_underground.UseVisualStyleBackColor = true;
             // 
             // chbBus
             // 
             this.chbBus.AutoSize = true;
             this.chbBus.Checked = true;
             this.chbBus.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.chbBus.Location = new System.Drawing.Point(180, 65);
+            this.chbBus.Location = new System.Drawing.Point(173, 39);
             this.chbBus.Name = "chbBus";
             this.chbBus.Size = new System.Drawing.Size(44, 17);
             this.chbBus.TabIndex = 9;
+            this.chbBus.Tag = "anotherChb";
             this.chbBus.Text = "Bus";
             this.chbBus.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
-            // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(400, 219);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.Size = new System.Drawing.Size(749, 306);
-            this.dataGridView1.TabIndex = 29;
-            // 
             // btnNearst
             // 
-            this.btnNearst.Location = new System.Drawing.Point(307, 60);
+            this.btnNearst.Location = new System.Drawing.Point(307, 71);
             this.btnNearst.Name = "btnNearst";
             this.btnNearst.Size = new System.Drawing.Size(75, 23);
             this.btnNearst.TabIndex = 27;
@@ -320,27 +306,29 @@
             // 
             // btnMap
             // 
-            this.btnMap.Location = new System.Drawing.Point(307, 88);
+            this.btnMap.Location = new System.Drawing.Point(307, 100);
             this.btnMap.Name = "btnMap";
             this.btnMap.Size = new System.Drawing.Size(75, 23);
             this.btnMap.TabIndex = 26;
             this.btnMap.Text = "Karte";
             this.btnMap.UseVisualStyleBackColor = true;
+            this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
+            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(39, 14);
+            this.label1.Location = new System.Drawing.Point(14, 10);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(261, 39);
+            this.label1.Size = new System.Drawing.Size(263, 41);
             this.label1.TabIndex = 25;
             this.label1.Text = "Swiss Transport";
             // 
             // lblTo
             // 
             this.lblTo.AutoSize = true;
-            this.lblTo.Location = new System.Drawing.Point(31, 93);
+            this.lblTo.Location = new System.Drawing.Point(2, 37);
             this.lblTo.Name = "lblTo";
             this.lblTo.Size = new System.Drawing.Size(36, 13);
             this.lblTo.TabIndex = 24;
@@ -349,7 +337,7 @@
             // lblFrom
             // 
             this.lblFrom.AutoSize = true;
-            this.lblFrom.Location = new System.Drawing.Point(31, 67);
+            this.lblFrom.Location = new System.Drawing.Point(2, 10);
             this.lblFrom.Name = "lblFrom";
             this.lblFrom.Size = new System.Drawing.Size(29, 13);
             this.lblFrom.TabIndex = 23;
@@ -357,120 +345,251 @@
             // 
             // txtTo
             // 
-            this.txtTo.Location = new System.Drawing.Point(95, 90);
+            this.txtTo.Location = new System.Drawing.Point(56, 33);
             this.txtTo.Name = "txtTo";
             this.txtTo.Size = new System.Drawing.Size(205, 20);
             this.txtTo.TabIndex = 20;
-            this.txtTo.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtTo_KeyUp);
             // 
             // txtFrom
             // 
-            this.txtFrom.Location = new System.Drawing.Point(95, 64);
+            this.txtFrom.Location = new System.Drawing.Point(56, 7);
             this.txtFrom.Name = "txtFrom";
             this.txtFrom.Size = new System.Drawing.Size(205, 20);
             this.txtFrom.TabIndex = 19;
-            this.txtFrom.KeyUp += new System.Windows.Forms.KeyEventHandler(this.txtFrom_KeyUp);
             // 
             // listResult
             // 
             this.listResult.FormattingEnabled = true;
-            this.listResult.Location = new System.Drawing.Point(466, 44);
+            this.listResult.Location = new System.Drawing.Point(-82, 451);
             this.listResult.Name = "listResult";
             this.listResult.Size = new System.Drawing.Size(120, 95);
             this.listResult.TabIndex = 31;
+            this.listResult.Visible = false;
             this.listResult.SelectedIndexChanged += new System.EventHandler(this.listResult_SelectedIndexChanged);
             // 
             // dtmDate
             // 
-            this.dtmDate.Location = new System.Drawing.Point(94, 119);
+            this.dtmDate.Location = new System.Drawing.Point(56, 177);
             this.dtmDate.Name = "dtmDate";
             this.dtmDate.Size = new System.Drawing.Size(104, 20);
             this.dtmDate.TabIndex = 21;
-            this.dtmDate.ValueChanged += new System.EventHandler(this.dtmDate_ValueChanged);
-            // 
-            // txtTime
-            // 
-            this.txtTime.Location = new System.Drawing.Point(243, 120);
-            this.txtTime.Name = "txtTime";
-            this.txtTime.Size = new System.Drawing.Size(43, 20);
-            this.txtTime.TabIndex = 32;
-            this.txtTime.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
-            // 
-            // btnDtInc
-            // 
-            this.btnDtInc.Location = new System.Drawing.Point(70, 118);
-            this.btnDtInc.Name = "btnDtInc";
-            this.btnDtInc.Size = new System.Drawing.Size(21, 24);
-            this.btnDtInc.TabIndex = 33;
-            this.btnDtInc.Text = "<";
-            this.btnDtInc.UseVisualStyleBackColor = true;
             // 
             // btnDtDec
             // 
-            this.btnDtDec.Location = new System.Drawing.Point(204, 117);
+            this.btnDtDec.Location = new System.Drawing.Point(40, 175);
             this.btnDtDec.Name = "btnDtDec";
-            this.btnDtDec.Size = new System.Drawing.Size(21, 24);
-            this.btnDtDec.TabIndex = 34;
-            this.btnDtDec.Text = ">";
+            this.btnDtDec.Size = new System.Drawing.Size(15, 21);
+            this.btnDtDec.TabIndex = 33;
+            this.btnDtDec.Text = "<";
             this.btnDtDec.UseVisualStyleBackColor = true;
-            this.btnDtDec.Click += new System.EventHandler(this.btnDtDec_Click);
+            this.btnDtDec.Click += new System.EventHandler(this.btnDtDec_Click_1);
+            // 
+            // btnDtInc
+            // 
+            this.btnDtInc.Location = new System.Drawing.Point(160, 175);
+            this.btnDtInc.Name = "btnDtInc";
+            this.btnDtInc.Size = new System.Drawing.Size(21, 21);
+            this.btnDtInc.TabIndex = 34;
+            this.btnDtInc.Text = ">";
+            this.btnDtInc.UseVisualStyleBackColor = true;
+            this.btnDtInc.Click += new System.EventHandler(this.btnDtDec_Click);
+            // 
+            // txtHour
+            // 
+            this.txtHour.Location = new System.Drawing.Point(181, 177);
+            this.txtHour.Maximum = new decimal(new int[] {
+            23,
+            0,
+            0,
+            0});
+            this.txtHour.Name = "txtHour";
+            this.txtHour.Size = new System.Drawing.Size(44, 20);
+            this.txtHour.TabIndex = 35;
+            this.txtHour.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
+            // 
+            // txtMin
+            // 
+            this.txtMin.Increment = new decimal(new int[] {
+            5,
+            0,
+            0,
+            0});
+            this.txtMin.Location = new System.Drawing.Point(224, 177);
+            this.txtMin.Maximum = new decimal(new int[] {
+            59,
+            0,
+            0,
+            0});
+            this.txtMin.Name = "txtMin";
+            this.txtMin.Size = new System.Drawing.Size(43, 20);
+            this.txtMin.TabIndex = 36;
+            // 
+            // btnDirection
+            // 
+            this.btnDirection.Location = new System.Drawing.Point(307, 128);
+            this.btnDirection.Name = "btnDirection";
+            this.btnDirection.Size = new System.Drawing.Size(75, 23);
+            this.btnDirection.TabIndex = 38;
+            this.btnDirection.Text = "Wegzeiger";
+            this.btnDirection.UseVisualStyleBackColor = true;
+            // 
+            // webBrowser1
+            // 
+            this.webBrowser1.Location = new System.Drawing.Point(389, 258);
+            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser1.Name = "webBrowser1";
+            this.webBrowser1.Size = new System.Drawing.Size(461, 255);
+            this.webBrowser1.TabIndex = 41;
+            // 
+            // lblStation
+            // 
+            this.lblStation.AutoSize = true;
+            this.lblStation.Location = new System.Drawing.Point(6, 17);
+            this.lblStation.Name = "lblStation";
+            this.lblStation.Size = new System.Drawing.Size(43, 13);
+            this.lblStation.TabIndex = 1;
+            this.lblStation.Text = "Station:";
+            // 
+            // txtStBoard
+            // 
+            this.txtStBoard.Location = new System.Drawing.Point(55, 14);
+            this.txtStBoard.Name = "txtStBoard";
+            this.txtStBoard.Size = new System.Drawing.Size(207, 20);
+            this.txtStBoard.TabIndex = 0;
+            // 
+            // btnRefresh
+            // 
+            this.btnRefresh.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.btnRefresh.Location = new System.Drawing.Point(307, 157);
+            this.btnRefresh.Name = "btnRefresh";
+            this.btnRefresh.Size = new System.Drawing.Size(75, 22);
+            this.btnRefresh.TabIndex = 44;
+            this.btnRefresh.Text = "Aktualisieren";
+            this.btnRefresh.UseVisualStyleBackColor = true;
+            // 
+            // tabClTxt
+            // 
+            this.tabClTxt.Controls.Add(this.tabConns);
+            this.tabClTxt.Controls.Add(this.tabStBoard);
+            this.tabClTxt.Location = new System.Drawing.Point(12, 71);
+            this.tabClTxt.Name = "tabClTxt";
+            this.tabClTxt.SelectedIndex = 0;
+            this.tabClTxt.Size = new System.Drawing.Size(287, 100);
+            this.tabClTxt.TabIndex = 49;
+            // 
+            // tabConns
+            // 
+            this.tabConns.Controls.Add(this.lblTo);
+            this.tabConns.Controls.Add(this.lblFrom);
+            this.tabConns.Controls.Add(this.txtFrom);
+            this.tabConns.Controls.Add(this.txtTo);
+            this.tabConns.Location = new System.Drawing.Point(4, 22);
+            this.tabConns.Name = "tabConns";
+            this.tabConns.Padding = new System.Windows.Forms.Padding(3);
+            this.tabConns.Size = new System.Drawing.Size(279, 74);
+            this.tabConns.TabIndex = 0;
+            this.tabConns.Text = "Fahrplan";
+            this.tabConns.UseVisualStyleBackColor = true;
+            // 
+            // tabStBoard
+            // 
+            this.tabStBoard.Controls.Add(this.txtStBoard);
+            this.tabStBoard.Controls.Add(this.lblStation);
+            this.tabStBoard.Location = new System.Drawing.Point(4, 22);
+            this.tabStBoard.Name = "tabStBoard";
+            this.tabStBoard.Padding = new System.Windows.Forms.Padding(3);
+            this.tabStBoard.Size = new System.Drawing.Size(279, 74);
+            this.tabStBoard.TabIndex = 1;
+            this.tabStBoard.Text = "Stationboard";
+            this.tabStBoard.UseVisualStyleBackColor = true;
+            // 
+            // webBrowser2
+            // 
+            this.webBrowser2.Location = new System.Drawing.Point(-1, 32);
+            this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser2.Name = "webBrowser2";
+            this.webBrowser2.Size = new System.Drawing.Size(474, 186);
+            this.webBrowser2.TabIndex = 50;
+            // 
+            // btnEmail
+            // 
+            this.btnEmail.Location = new System.Drawing.Point(387, 3);
+            this.btnEmail.Name = "btnEmail";
+            this.btnEmail.Size = new System.Drawing.Size(75, 23);
+            this.btnEmail.TabIndex = 51;
+            this.btnEmail.Text = "Email";
+            this.btnEmail.UseVisualStyleBackColor = true;
+            // 
+            // pnlWeb
+            // 
+            this.pnlWeb.Controls.Add(this.btnEmail);
+            this.pnlWeb.Controls.Add(this.webBrowser2);
+            this.pnlWeb.Location = new System.Drawing.Point(389, 28);
+            this.pnlWeb.Name = "pnlWeb";
+            this.pnlWeb.Size = new System.Drawing.Size(467, 221);
+            this.pnlWeb.TabIndex = 52;
+            this.pnlWeb.Visible = false;
             // 
             // UserControl1
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.btnDtDec);
-            this.Controls.Add(this.btnDtInc);
-            this.Controls.Add(this.txtTime);
-            this.Controls.Add(this.listResult);
+            this.Controls.Add(this.pnlWeb);
+            this.Controls.Add(this.tabClTxt);
             this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.groupBox3);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.btnDirection);
+            this.Controls.Add(this.txtMin);
+            this.Controls.Add(this.txtHour);
+            this.Controls.Add(this.btnDtInc);
+            this.Controls.Add(this.btnDtDec);
+            this.Controls.Add(this.listResult);
+            this.Controls.Add(this.gBoxAdvSearch);
             this.Controls.Add(this.btnNearst);
             this.Controls.Add(this.btnMap);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.lblTo);
-            this.Controls.Add(this.lblFrom);
             this.Controls.Add(this.dtmDate);
-            this.Controls.Add(this.txtTo);
-            this.Controls.Add(this.txtFrom);
             this.Name = "UserControl1";
-            this.Size = new System.Drawing.Size(1165, 675);
-            this.groupBox3.ResumeLayout(false);
-            this.groupBox3.PerformLayout();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.Size = new System.Drawing.Size(876, 565);
+            this.gBoxAdvSearch.ResumeLayout(false);
+            this.gBoxAdvSearch.PerformLayout();
             this.groupBox2.ResumeLayout(false);
             this.groupBox2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtHour)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.txtMin)).EndInit();
+            this.tabClTxt.ResumeLayout(false);
+            this.tabConns.ResumeLayout(false);
+            this.tabConns.PerformLayout();
+            this.tabStBoard.ResumeLayout(false);
+            this.tabStBoard.PerformLayout();
+            this.pnlWeb.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
         }
 
         #endregion
-
-        private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.Button btnReset;
-        private System.Windows.Forms.GroupBox groupBox3;
-        private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.CheckBox chbSSnR;
+        private System.Windows.Forms.GroupBox gBoxAdvSearch;
+        private System.Windows.Forms.CheckBox chbS_sn_r;
         private System.Windows.Forms.CheckBox chbIr;
-        private System.Windows.Forms.CheckBox chbEcIc;
-        private System.Windows.Forms.CheckBox chbICE;
-        private System.Windows.Forms.CheckBox chbAutoExt;
+        private System.Windows.Forms.CheckBox chbEc_ic;
+        private System.Windows.Forms.CheckBox chbIce_tgv_rj;
+        private System.Windows.Forms.CheckBox chbArz_ext;
         private System.Windows.Forms.CheckBox chbZug;
         private System.Windows.Forms.GroupBox groupBox2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rdBtnLimit;
         private System.Windows.Forms.RadioButton rdBtnNoLimit;
-        private System.Windows.Forms.Label lblBarrier;
-        private System.Windows.Forms.CheckBox chbSchiff;
-        private System.Windows.Forms.CheckBox chbSeilbahn;
-        private System.Windows.Forms.CheckBox chbVelo;
+        private System.Windows.Forms.CheckBox chbShip;
+        private System.Windows.Forms.CheckBox chbCableway;
+        private System.Windows.Forms.CheckBox chbBike;
         private System.Windows.Forms.Label lblVia;
-        private System.Windows.Forms.CheckBox chbTram;
+        private System.Windows.Forms.CheckBox chbTramway_underground;
         private System.Windows.Forms.CheckBox chbBus;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.Button btnNearst;
         private System.Windows.Forms.Button btnMap;
         private System.Windows.Forms.Label label1;
@@ -480,8 +599,21 @@
         private System.Windows.Forms.TextBox txtFrom;
         private System.Windows.Forms.ListBox listResult;
         private System.Windows.Forms.DateTimePicker dtmDate;
-        private System.Windows.Forms.TextBox txtTime;
-        private System.Windows.Forms.Button btnDtInc;
         private System.Windows.Forms.Button btnDtDec;
+        private System.Windows.Forms.Button btnDtInc;
+        private System.Windows.Forms.NumericUpDown txtHour;
+        private System.Windows.Forms.NumericUpDown txtMin;
+        private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
+        private System.Windows.Forms.Button btnDirection;
+        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.Label lblStation;
+        private System.Windows.Forms.TextBox txtStBoard;
+        private System.Windows.Forms.Button btnRefresh;
+        private System.Windows.Forms.TabControl tabClTxt;
+        private System.Windows.Forms.TabPage tabConns;
+        private System.Windows.Forms.TabPage tabStBoard;
+        private System.Windows.Forms.WebBrowser webBrowser2;
+        private System.Windows.Forms.Button btnEmail;
+        private System.Windows.Forms.Panel pnlWeb;
     }
 }
