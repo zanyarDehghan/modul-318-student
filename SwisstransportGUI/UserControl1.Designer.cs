@@ -47,7 +47,7 @@
             this.chbBus = new System.Windows.Forms.CheckBox();
             this.btnNearst = new System.Windows.Forms.Button();
             this.btnMap = new System.Windows.Forms.Button();
-            this.label1 = new System.Windows.Forms.Label();
+            this.lblTitel = new System.Windows.Forms.Label();
             this.lblTo = new System.Windows.Forms.Label();
             this.lblFrom = new System.Windows.Forms.Label();
             this.txtTo = new System.Windows.Forms.TextBox();
@@ -59,14 +59,14 @@
             this.txtHour = new System.Windows.Forms.NumericUpDown();
             this.txtMin = new System.Windows.Forms.NumericUpDown();
             this.folderBrowserDialog1 = new System.Windows.Forms.FolderBrowserDialog();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.wbBrowserMap = new System.Windows.Forms.WebBrowser();
             this.lblStation = new System.Windows.Forms.Label();
             this.txtStBoard = new System.Windows.Forms.TextBox();
             this.btnRefresh = new System.Windows.Forms.Button();
             this.tabClTxt = new System.Windows.Forms.TabControl();
             this.tabConns = new System.Windows.Forms.TabPage();
             this.tabStBoard = new System.Windows.Forms.TabPage();
-            this.webBrowser2 = new System.Windows.Forms.WebBrowser();
+            this.wbBrowserDataTable = new System.Windows.Forms.WebBrowser();
             this.btnEmail = new System.Windows.Forms.Button();
             this.pnlWeb = new System.Windows.Forms.Panel();
             this.lblNotifi = new System.Windows.Forms.Label();
@@ -316,16 +316,16 @@
             this.btnMap.UseVisualStyleBackColor = true;
             this.btnMap.Click += new System.EventHandler(this.btnMap_Click);
             // 
-            // label1
+            // lblTitel
             // 
-            this.label1.AutoSize = true;
-            this.label1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(14, 10);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(263, 41);
-            this.label1.TabIndex = 25;
-            this.label1.Text = "Swiss Transport";
+            this.lblTitel.AutoSize = true;
+            this.lblTitel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.lblTitel.Font = new System.Drawing.Font("Microsoft Sans Serif", 25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.lblTitel.Location = new System.Drawing.Point(14, 10);
+            this.lblTitel.Name = "lblTitel";
+            this.lblTitel.Size = new System.Drawing.Size(263, 41);
+            this.lblTitel.TabIndex = 25;
+            this.lblTitel.Text = "Swiss Transport";
             // 
             // lblTo
             // 
@@ -384,7 +384,6 @@
             this.btnDtDec.TabIndex = 33;
             this.btnDtDec.Text = "<";
             this.btnDtDec.UseVisualStyleBackColor = true;
-            this.btnDtDec.Click += new System.EventHandler(this.btnDtDec_Click_1);
             // 
             // btnDtInc
             // 
@@ -430,13 +429,13 @@
             this.txtMin.Size = new System.Drawing.Size(43, 20);
             this.txtMin.TabIndex = 36;
             // 
-            // webBrowser1
+            // wbBrowserMap
             // 
-            this.webBrowser1.Location = new System.Drawing.Point(389, 258);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(467, 255);
-            this.webBrowser1.TabIndex = 41;
+            this.wbBrowserMap.Location = new System.Drawing.Point(389, 258);
+            this.wbBrowserMap.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbBrowserMap.Name = "wbBrowserMap";
+            this.wbBrowserMap.Size = new System.Drawing.Size(467, 255);
+            this.wbBrowserMap.TabIndex = 41;
             // 
             // lblStation
             // 
@@ -500,13 +499,13 @@
             this.tabStBoard.Text = "Abfahrtstafel";
             this.tabStBoard.UseVisualStyleBackColor = true;
             // 
-            // webBrowser2
+            // wbBrowserDataTable
             // 
-            this.webBrowser2.Location = new System.Drawing.Point(-1, 32);
-            this.webBrowser2.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser2.Name = "webBrowser2";
-            this.webBrowser2.Size = new System.Drawing.Size(474, 186);
-            this.webBrowser2.TabIndex = 50;
+            this.wbBrowserDataTable.Location = new System.Drawing.Point(-1, 32);
+            this.wbBrowserDataTable.MinimumSize = new System.Drawing.Size(20, 20);
+            this.wbBrowserDataTable.Name = "wbBrowserDataTable";
+            this.wbBrowserDataTable.Size = new System.Drawing.Size(474, 186);
+            this.wbBrowserDataTable.TabIndex = 50;
             // 
             // btnEmail
             // 
@@ -523,7 +522,7 @@
             this.pnlWeb.Controls.Add(this.lblNotifi);
             this.pnlWeb.Controls.Add(this.txtMail);
             this.pnlWeb.Controls.Add(this.btnEmail);
-            this.pnlWeb.Controls.Add(this.webBrowser2);
+            this.pnlWeb.Controls.Add(this.wbBrowserDataTable);
             this.pnlWeb.Location = new System.Drawing.Point(389, 28);
             this.pnlWeb.Name = "pnlWeb";
             this.pnlWeb.Size = new System.Drawing.Size(467, 221);
@@ -552,7 +551,7 @@
             this.Controls.Add(this.pnlWeb);
             this.Controls.Add(this.tabClTxt);
             this.Controls.Add(this.btnRefresh);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.wbBrowserMap);
             this.Controls.Add(this.txtMin);
             this.Controls.Add(this.txtHour);
             this.Controls.Add(this.btnDtInc);
@@ -561,7 +560,7 @@
             this.Controls.Add(this.gBoxAdvSearch);
             this.Controls.Add(this.btnNearst);
             this.Controls.Add(this.btnMap);
-            this.Controls.Add(this.label1);
+            this.Controls.Add(this.lblTitel);
             this.Controls.Add(this.dtmDate);
             this.Name = "UserControl1";
             this.Size = new System.Drawing.Size(876, 565);
@@ -603,7 +602,7 @@
         private System.Windows.Forms.CheckBox chbBus;
         private System.Windows.Forms.Button btnNearst;
         private System.Windows.Forms.Button btnMap;
-        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Label lblTitel;
         private System.Windows.Forms.Label lblTo;
         private System.Windows.Forms.Label lblFrom;
         private System.Windows.Forms.TextBox txtTo;
@@ -615,14 +614,14 @@
         private System.Windows.Forms.NumericUpDown txtHour;
         private System.Windows.Forms.NumericUpDown txtMin;
         private System.Windows.Forms.FolderBrowserDialog folderBrowserDialog1;
-        private System.Windows.Forms.WebBrowser webBrowser1;
+        private System.Windows.Forms.WebBrowser wbBrowserMap;
         private System.Windows.Forms.Label lblStation;
         private System.Windows.Forms.TextBox txtStBoard;
         private System.Windows.Forms.Button btnRefresh;
         private System.Windows.Forms.TabControl tabClTxt;
         private System.Windows.Forms.TabPage tabConns;
         private System.Windows.Forms.TabPage tabStBoard;
-        private System.Windows.Forms.WebBrowser webBrowser2;
+        private System.Windows.Forms.WebBrowser wbBrowserDataTable;
         private System.Windows.Forms.Button btnEmail;
         private System.Windows.Forms.Panel pnlWeb;
         private System.Windows.Forms.TextBox txtMail;

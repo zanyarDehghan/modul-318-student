@@ -28,7 +28,7 @@ namespace SwisstransportGUI
             txtMin.Text = strMin;
 
             browserView = new WinFormsBrowserView();
-            webBrowser1.Controls.Add((Control)browserView.GetComponent());
+            wbBrowserMap.Controls.Add((Control)browserView.GetComponent());
 
             //Events für Controls hinzufügen
             txtFrom.KeyUp += Common_txtKeyUp;
@@ -51,7 +51,7 @@ namespace SwisstransportGUI
             }
         }
 
-        //fragt nach Stationen, die in Listbox gelistet werden.
+        //fragt nach Stationen, die in in Textbox eingegeben wurde.
         public void getStListe(string clName, double lat, double longt, string clText)
         {
 
@@ -267,10 +267,10 @@ namespace SwisstransportGUI
                 string html ="<html><head><style>table {font-size:12px;background-color:blue; color:white; border-collapse: collapse; width: 100 %;}";
                 html += "th, td {padding: 0.25rem; text-align: left; border: 1px solid #ccc;} tbody tr:hover {background: red;color: white;}</style></head><body><table><thead><th>Abfahrt</th><th>Ankunft</th>";
                 html +="<th> Dauer </th><th> Gleis </th><th> Mit </th><th> Belegung </th></thead> " + tblBody + " </table></body></html>";
-                webBrowser2.Navigate("about:blank");
-                webBrowser2.Document.OpenNew(false);
-                webBrowser2.Document.Write(html);
-                webBrowser2.Refresh();
+                wbBrowserDataTable.Navigate("about:blank");
+                wbBrowserDataTable.Document.OpenNew(false);
+                wbBrowserDataTable.Document.Write(html);
+                wbBrowserDataTable.Refresh();
             }
         }
 
@@ -377,10 +377,10 @@ namespace SwisstransportGUI
                 string htmlData = "<html><head><style>table {font-size:12px; border-collapse: collapse; width: 100 %;} ";
                 htmlData +="th, td {padding: 0.25rem; text-align: left; border: 1px solid #ccc;} tbody tr:hover {background: red;color: white;}</style></head><body>";
                 string html =htmlData+"<table><thead><th>Nach</th><th>Ankunft</th><th>Gleis</th><th>Mit</th><th>Belegung</th></thead>" + tblBody + "</table></body></html>";
-                webBrowser2.Navigate("about:blank");
-                webBrowser2.Document.OpenNew(false);
-                webBrowser2.Document.Write(html);
-                webBrowser2.Refresh();
+                wbBrowserDataTable.Navigate("about:blank");
+                wbBrowserDataTable.Document.OpenNew(false);
+                wbBrowserDataTable.Document.Write(html);
+                wbBrowserDataTable.Refresh();
             }
 
         }
@@ -458,7 +458,7 @@ namespace SwisstransportGUI
 
         private void btnMap_Click(object sender, EventArgs e)
         {
-            webBrowser1.Visible = true;
+            wbBrowserMap.Visible = true;
             getMap();
         }
 
@@ -469,8 +469,7 @@ namespace SwisstransportGUI
             }
         }
 
-        Decimal H_OldValue = 0;
-        Decimal M_OldValue = 0;
+
         private void ListBoxListener(object sender, System.Windows.Forms.KeyEventArgs e)
         {
             if (listResult.Visible == true)
@@ -504,7 +503,9 @@ namespace SwisstransportGUI
                 }
             }
         }
-            private void params_FormChanged(object sender, EventArgs e)
+        Decimal H_OldValue = 0;
+        Decimal M_OldValue = 0;
+        private void params_FormChanged(object sender, EventArgs e)
         {
            
             if (txtHour.Value > H_OldValue)
@@ -760,7 +761,7 @@ namespace SwisstransportGUI
 
                 string fromEmail = "sbbtransport22@gmail.com";
 
-                MailMessage mailMessage = new MailMessage(fromEmail, txtMail.Text, "SBB Fahrplan", webBrowser2.DocumentText);
+                MailMessage mailMessage = new MailMessage(fromEmail, txtMail.Text, "SBB Fahrplan", wbBrowserDataTable.DocumentText);
                 SmtpClient smtpClient = new SmtpClient("smtp.gmail.com", 587);
                 smtpClient.EnableSsl = true;
                 smtpClient.UseDefaultCredentials = false;
@@ -783,11 +784,6 @@ namespace SwisstransportGUI
                 Console.Write(ex);
             }
 
-
-        }
-
-        private void btnDtDec_Click_1(object sender, EventArgs e)
-        {
 
         }
     }
