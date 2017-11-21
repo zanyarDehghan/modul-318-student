@@ -698,7 +698,6 @@ namespace SwisstransportGUI
         }
         public string getLocUseIP(string which)
         {
-
             string IPAdr = new WebClient().DownloadString(@"http://icanhazip.com").Trim();
             if (IPAdr != "" && IPAdr != "null")
             {
