@@ -367,7 +367,7 @@
             this.listResult.Size = new System.Drawing.Size(120, 95);
             this.listResult.TabIndex = 31;
             this.listResult.Visible = false;
-            this.listResult.SelectedIndexChanged += new System.EventHandler(this.listResult_SelectedIndexChanged);
+            this.listResult.Click += new System.EventHandler(this.listResult_Click);
             // 
             // dtmDate
             // 
@@ -378,18 +378,19 @@
             // 
             // btnDtDec
             // 
-            this.btnDtDec.Location = new System.Drawing.Point(40, 175);
+            this.btnDtDec.Location = new System.Drawing.Point(39, 176);
             this.btnDtDec.Name = "btnDtDec";
-            this.btnDtDec.Size = new System.Drawing.Size(15, 21);
+            this.btnDtDec.Size = new System.Drawing.Size(21, 23);
             this.btnDtDec.TabIndex = 33;
             this.btnDtDec.Text = "<";
             this.btnDtDec.UseVisualStyleBackColor = true;
+
             // 
             // btnDtInc
             // 
-            this.btnDtInc.Location = new System.Drawing.Point(160, 175);
+            this.btnDtInc.Location = new System.Drawing.Point(160, 176);
             this.btnDtInc.Name = "btnDtInc";
-            this.btnDtInc.Size = new System.Drawing.Size(21, 21);
+            this.btnDtInc.Size = new System.Drawing.Size(21, 23);
             this.btnDtInc.TabIndex = 34;
             this.btnDtInc.Text = ">";
             this.btnDtInc.UseVisualStyleBackColor = true;
@@ -462,7 +463,7 @@
             this.btnRefresh.TabIndex = 44;
             this.btnRefresh.Text = "Aktualisieren";
             this.btnRefresh.UseVisualStyleBackColor = true;
-            this.btnRefresh.Click += new System.EventHandler(this.btnRefresh_Click);
+
             // 
             // tabClTxt
             // 
@@ -497,7 +498,7 @@
             this.tabStBoard.Padding = new System.Windows.Forms.Padding(3);
             this.tabStBoard.Size = new System.Drawing.Size(279, 74);
             this.tabStBoard.TabIndex = 1;
-            this.tabStBoard.Text = "Stationboard";
+            this.tabStBoard.Text = "Abfahrtstafel";
             this.tabStBoard.UseVisualStyleBackColor = true;
             // 
             // webBrowser2

@@ -45,7 +45,7 @@
             this.ClientSize = new System.Drawing.Size(876, 548);
             this.Controls.Add(this.userControl11);
             this.Name = "MainForm";
-            this.Text = "Form1";
+            this.Text = "Swiss-Transport";
             this.Load += new System.EventHandler(this.MainForm_Load);
             this.ResumeLayout(false);
 

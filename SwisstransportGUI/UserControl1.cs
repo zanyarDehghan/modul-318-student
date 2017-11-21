@@ -1,19 +1,11 @@
 ﻿using System;
-using System.IO;
 using System.Net;
-using System.Net.Http;
 using System.Device.Location;
-using System.Net.Sockets;
-using System.Collections.Generic;
-using System.ComponentModel;
 using System.Drawing;
 using System.Windows.Forms;
-using Newtonsoft.Json;
-using System.Web;
 using Newtonsoft.Json.Linq;
 using DotNetBrowser;
 using DotNetBrowser.WinForms;
-
 using System.Net.Mail;
 
 namespace SwisstransportGUI
@@ -38,17 +30,17 @@ namespace SwisstransportGUI
             browserView = new WinFormsBrowserView();
             webBrowser1.Controls.Add((Control)browserView.GetComponent());
 
+            //Events für Controls hinzufügen
             txtFrom.KeyUp += Common_txtKeyUp;
             txtTo.KeyUp += Common_txtKeyUp;
             txtStBoard.KeyUp += Common_txtKeyUp;
             dtmDate.ValueChanged += params_FormChanged;
             txtHour.ValueChanged += params_FormChanged;
             txtMin.ValueChanged += params_FormChanged;
-
             btnRefresh.Click+= params_FormChanged;
-
             rdBtnLimit.Click += params_FormChanged;
             rdBtnNoLimit.Click += params_FormChanged;
+            tabClTxt.KeyUp += ListBoxListener;
 
             foreach (Control c in gBoxAdvSearch.Controls)
             {  
@@ -59,6 +51,7 @@ namespace SwisstransportGUI
             }
         }
 
+        //fragt nach Stationen, die in Listbox gelistet werden.
         public void getStListe(string clName, double lat, double longt, string clText)
         {
 
@@ -89,6 +82,7 @@ namespace SwisstransportGUI
             listResult.BringToFront();
         }
 
+        //es sammelt die Parameters welche via URL an Swiss Transport Datenbank gesendet wird.
         public string getParams()
         {
             string strDtTm = dtmDate.Value.ToString("yyyy-MM-dd");
@@ -145,7 +139,7 @@ namespace SwisstransportGUI
 
         }
 
-
+        //es fragt nach mögliche Verbindungen
         private void showConnections(string from, string to)
         {
             pnlWeb.Visible = true;
@@ -158,24 +152,26 @@ namespace SwisstransportGUI
             string tblBody="";
             string row1="";
             string row2="";
-            for (i = 0; i <connListe.ConnectionList.Count; i++)
+            for (i = 0; i < connListe.ConnectionList.Count; i++)
             {
                
                 string DurTm = connListe.ConnectionList[i].Duration;
                 string platformNr = connListe.ConnectionList[i].From.Platform;
 
-                string journeyNr = "";
                 string journeyOp = "";
 
-                journeyNr = connListe.ConnectionList[0].Sections[0].Journey.Number;
-                journeyOp = connListe.ConnectionList[0].Sections[0].Journey.Operator;
-                journeyOp += " " + journeyNr;
-            
+                if (connListe.ConnectionList[i].Sections[0].Journey.Operator != null)
+                {
+                    journeyOp = connListe.ConnectionList[i].Sections[0].Journey.Operator;
+                    if (connListe.ConnectionList[i].Sections[0].Journey.Number!=null)
+                    {
+                        journeyOp += " " + connListe.ConnectionList[i].Sections[0].Journey.Number;
+                    }
+                }
                 
                 DurTm = DurTm.Substring(3, DurTm.Length - 3);
 
                 DurTm = DurTm.Substring(0, 5);
-
 
                 var array = DurTm.Split(new string[] { ":", " " }, StringSplitOptions.RemoveEmptyEntries);
                 int DurTmH = Int32.Parse(array[0]); 
@@ -268,8 +264,9 @@ namespace SwisstransportGUI
                 row2 = "<tr><td>" + DepTm + delayMin +"</td><td>" + ArrTm + "</td><td>" + DurTm + "</td><td>" + platformNr + "</td></td>" + "</td><td>" + journeyOp + "</td><td>" + Capacity + "</td></td>";
                 tblBody += row1 + row2;
 
-                string html =
-"<html><head><style>table {font-size:12px;background-color:blue; color:white; border-collapse: collapse; width: 100 %;} th, td {padding: 0.25rem; text-align: left; border: 1px solid #ccc;} tbody tr:hover {background: red;color: white;}</style></head><body><table><thead><th>Abfahrt</th><th>Ankunft</th><th>Dauer</th><th>Gleis</th><th>Mit</th><th>Belegung</th></thead>" + tblBody + "</table></body></html>";
+                string html ="<html><head><style>table {font-size:12px;background-color:blue; color:white; border-collapse: collapse; width: 100 %;}";
+                html += "th, td {padding: 0.25rem; text-align: left; border: 1px solid #ccc;} tbody tr:hover {background: red;color: white;}</style></head><body><table><thead><th>Abfahrt</th><th>Ankunft</th>";
+                html +="<th> Dauer </th><th> Gleis </th><th> Mit </th><th> Belegung </th></thead> " + tblBody + " </table></body></html>";
                 webBrowser2.Navigate("about:blank");
                 webBrowser2.Document.OpenNew(false);
                 webBrowser2.Document.Write(html);
@@ -278,8 +275,7 @@ namespace SwisstransportGUI
         }
 
 
-
-
+        // schient Abfrahrtstaffel
         public void showStBoard(string clText)
         {
             pnlWeb.Visible = true;
@@ -315,9 +311,8 @@ namespace SwisstransportGUI
                 string Cp2 = "&#128697;";
                 string Cp1 = "&#128697;";
 
-                journeyNr = boardList.Entries[i].Name;
-                journeyCat = boardList.Entries[i].Category;
-                journeyCat += " " + journeyNr;
+
+                journeyCat += boardList.Entries[i].Operator +" " + boardList.Entries[i].Name;
 
                 if (boardList.Entries[i].Stop.Prognosis.Capacity1st != null)
                 {
@@ -350,44 +345,38 @@ namespace SwisstransportGUI
                 DateTime dtA = Convert.ToDateTime(ArrDatTim);
                 string ArrTm = dtA.ToUniversalTime().ToString("HH':'mm");
 
-                if (i == 0)
-                {
+                if (i == 0){
                     row1 = "<tr><td colspan='3'>" + DepDt + "<td></td>";
                 }
-                else
-                {
+                else {
                     row1 = "";
                 }
                 string DepDatTimOld = "";
 
-                if (i > 0)
-                {
+                if (i > 0){
                     DepDatTimOld = boardList.Entries[i].Stop.Departure;
 
                 }
-                else
-                {
+                else{
                     DepDatTimOld = boardList.Entries[i].Stop.Arrival;
                 }
 
                 DateTime dtD_Old = Convert.ToDateTime(DepDatTimOld);
-                if (dtD.Day > dtD_Old.Day)
-                {
+                if (dtD.Day > dtD_Old.Day) {
                     row1 = "<tr style='background-color:blue; color:white;'><td colspan='5'>" + DepDt + "<td></td>";
                 }
 
                 string delayMin = "";
 
-                if (delay> 0)
-                {
+                if (delay> 0) {
                     delayMin = " ca. +" + delay.ToString();
                 }
 
                 row2 = "<tr><td>" + toDest  + "</td><td>" + DepTm + delayMin+ "</td><td>" + platformNr + "</td></td>" + "</td><td>" + journeyCat + "</td><td>" + Capacity + "</td></td>";
                 tblBody += row1 + row2;
-
-                string html =
-"<html><head><style>table {font-size:12px; border-collapse: collapse; width: 100 %;} th, td {padding: 0.25rem; text-align: left; border: 1px solid #ccc;} tbody tr:hover {background: red;color: white;}</style></head><body><table><thead><th>Nach</th><th>Ankunft</th><th>Gleis</th><th>Mit</th><th>Belegung</th></thead>" + tblBody + "</table></body></html>";
+                string htmlData = "<html><head><style>table {font-size:12px; border-collapse: collapse; width: 100 %;} ";
+                htmlData +="th, td {padding: 0.25rem; text-align: left; border: 1px solid #ccc;} tbody tr:hover {background: red;color: white;}</style></head><body>";
+                string html =htmlData+"<table><thead><th>Nach</th><th>Ankunft</th><th>Gleis</th><th>Mit</th><th>Belegung</th></thead>" + tblBody + "</table></body></html>";
                 webBrowser2.Navigate("about:blank");
                 webBrowser2.Document.OpenNew(false);
                 webBrowser2.Document.Write(html);
@@ -396,6 +385,7 @@ namespace SwisstransportGUI
 
         }
 
+        // wird aufgerufen falls Text Eingabe gibt.
         private void InputsListener(string clName)
         {
             string clText = "";
@@ -434,9 +424,9 @@ namespace SwisstransportGUI
                 showStBoard(txtStBoard.Text);
             }
         }
-        private void listResult_SelectedIndexChanged(object sender, EventArgs e)
+        // Wenn auf Stationliste geklickt wird.
+        private void listResult_Click(object sender, EventArgs e)
         {
-           
             string clsName = ((Control)sender).Tag.ToString();
             string clsText = "";
 
@@ -449,6 +439,7 @@ namespace SwisstransportGUI
                         clsText = c.Text;
                         c.Text = listResult.SelectedItem.ToString();
                         c.Focus();
+                        
                     }
                 }
             }
@@ -471,16 +462,49 @@ namespace SwisstransportGUI
             getMap();
         }
 
-        private void Common_txtKeyUp(object sender, EventArgs e)
+        private void Common_txtKeyUp(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            InputsListener(((Control)sender).Name);
+            if (e.KeyCode != Keys.Down && e.KeyCode != Keys.Up && e.KeyCode != Keys.Enter) { 
+                InputsListener(((Control)sender).Name);
+            }
         }
-
 
         Decimal H_OldValue = 0;
         Decimal M_OldValue = 0;
+        private void ListBoxListener(object sender, System.Windows.Forms.KeyEventArgs e)
+        {
+            if (listResult.Visible = true)
+            {
+                if ( e.KeyCode == Keys.Enter) {
 
-        private void params_FormChanged(object sender, EventArgs e)
+                    string clsName = listResult.Tag.ToString();
+
+                    foreach (TabPage t in tabClTxt.TabPages)
+                    {
+                        foreach (Control c in t.Controls)
+                        {
+                            if (c.Name == clsName)
+                            {
+                                c.Text = listResult.SelectedItem.ToString();
+                                c.Focus();
+                                listResult.Visible = false;
+                            }
+                        }
+                    }
+                    listResult.SetSelected(listResult.SelectedIndex,true);
+                    
+                }
+               if ( e.KeyCode== Keys.Up) {
+
+                    listResult.SelectedIndex--;
+                }
+                else if (e.KeyCode == Keys.Down)
+                {
+                    listResult.SelectedIndex++;
+                }
+            }
+        }
+            private void params_FormChanged(object sender, EventArgs e)
         {
            
             if (txtHour.Value > H_OldValue)
@@ -565,8 +589,7 @@ namespace SwisstransportGUI
             }
         }
 
-
-
+        // Form zurücksetzen
         private void btnReset_Click(object sender, EventArgs e)
         {
             foreach (Control c in gBoxAdvSearch.Controls)
@@ -602,14 +625,14 @@ namespace SwisstransportGUI
             string strMin = DateTime.Now.ToString("mm");
             txtMin.Text = strMin;
         }
-
+        //Fragt nach Karte
         public void getMap()
         {
             string place = "";
             if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabConns"])
             {
-                place = txtFrom.Text;
-            }
+               place = txtFrom.Text;
+             }
             else if (tabClTxt.SelectedTab == tabClTxt.TabPages["tabStBoard"])
             {
                 place = txtStBoard.Text;
@@ -619,7 +642,6 @@ namespace SwisstransportGUI
 
             if (place != "")
             {
-
                 SwissTransport.Transport trsp = new SwissTransport.Transport();
                 SwissTransport.Stations stLst = new SwissTransport.Stations();
                 stLst = trsp.GetStations(place, 0, 0);
@@ -643,7 +665,6 @@ namespace SwisstransportGUI
             }
             else if (ltLnIP != "NULL")
             {
-
                 browserView.Browser.LoadURL(Environment.CurrentDirectory + "/map.html?" + ltLnIP);
             }
             else
@@ -652,6 +673,7 @@ namespace SwisstransportGUI
             }
 
         }
+
         public string getLatlnUseGPS()
         {
             GeoCoordinateWatcher watcher = new GeoCoordinateWatcher(GeoPositionAccuracy.Default);
@@ -669,7 +691,7 @@ namespace SwisstransportGUI
                 return "NULL";
             }
         }
-        public string GetInfo(string ipAddress)
+        public string getInfo(string ipAddress)
         {
             return new WebClient().DownloadString("http://freegeoip.net/json/" + ipAddress);
 
@@ -680,7 +702,7 @@ namespace SwisstransportGUI
             string IPAdr = new WebClient().DownloadString(@"http://icanhazip.com").Trim();
             if (IPAdr != "" && IPAdr != "null")
             {
-                string jsonInfo = GetInfo(IPAdr);
+                string jsonInfo = getInfo(IPAdr);
                 var obj = JObject.Parse(jsonInfo);
                 var city = (string)obj["city"];
                 var lat = (string)obj["latitude"];
@@ -752,7 +774,7 @@ namespace SwisstransportGUI
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Es hat einen Fehler aufgetretten", ex.ToString());
+                    MessageBox.Show("Es hat einen Fehler aufgetretten. Email konnte nicht gesendet werden");
                     Console.Write(ex.Message);
                 }
             }
@@ -764,10 +786,6 @@ namespace SwisstransportGUI
 
         }
 
-        private void btnRefresh_Click(object sender, EventArgs e)
-        {
-
-        }
     }
 
 }

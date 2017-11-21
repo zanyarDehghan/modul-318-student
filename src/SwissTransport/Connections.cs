@@ -58,10 +58,12 @@ namespace SwissTransport
         [JsonProperty("arrival")]
         public Stop Arrival{ get; set; }
     }
+
     public class Walk{
         [JsonProperty("duration")]
         public string Duration { get; set; }
     }
+
     public class Journey
     {
         [JsonProperty("name")]
@@ -85,6 +87,10 @@ namespace SwissTransport
         [JsonProperty("to")]
         public string To { get; set; }
 
+        [JsonProperty("passList")]
+        public List<Stop> PassList { get; set; }
+        
+
         [JsonProperty("capacity1st")]
         public string Capacity1st { get; set; }
 
@@ -92,6 +98,7 @@ namespace SwissTransport
         public string Capacity2nd { get; set; }
 
     }
+
     public class Stop
     {
         [JsonProperty("station")]
@@ -112,19 +119,17 @@ namespace SwissTransport
         [JsonProperty("prognosis")]
         public Prognosis Prognosis;
     }
+
     public class Prognosis
     {
         [JsonProperty("platform")]
         public string Platform;
 
-
-        [JsonProperty("arrival")]
-        public string Arrival { get; set; }
-
-
         [JsonProperty("departure")]
         public string Departure { get; set; }
 
+        [JsonProperty("arrival")]
+        public string Arrival { get; set; }
 
         [JsonProperty("capacity1st")]
         public int? Capacity1st { get; set; }
@@ -132,10 +137,14 @@ namespace SwissTransport
         [JsonProperty("capacity2nd")]
         public int? Capacity2nd { get; set; }
     }
+
     public class Location
     {
         [JsonProperty("id")]
         public int? Id { get; set; }
+
+        [JsonProperty("type")]
+        public string Type { get; set; }
 
         [JsonProperty("name")]
         public string Name{get; set;}
@@ -149,6 +158,7 @@ namespace SwissTransport
         [JsonProperty("distance")]
         public string Distance { get; set; }
     }
+
     public class ConnectionPoint
     {
         [JsonProperty("station")]
@@ -168,4 +178,5 @@ namespace SwissTransport
 
         public string RealtimeAvailability { get; set; }
     }
+
 }
