@@ -371,20 +371,20 @@
             // 
             // dtmDate
             // 
-            this.dtmDate.Location = new System.Drawing.Point(56, 177);
+            this.dtmDate.Location = new System.Drawing.Point(55, 177);
             this.dtmDate.Name = "dtmDate";
             this.dtmDate.Size = new System.Drawing.Size(104, 20);
             this.dtmDate.TabIndex = 21;
             // 
             // btnDtDec
             // 
-            this.btnDtDec.Location = new System.Drawing.Point(39, 176);
+            this.btnDtDec.Location = new System.Drawing.Point(33, 176);
             this.btnDtDec.Name = "btnDtDec";
             this.btnDtDec.Size = new System.Drawing.Size(21, 23);
             this.btnDtDec.TabIndex = 33;
             this.btnDtDec.Text = "<";
             this.btnDtDec.UseVisualStyleBackColor = true;
-
+            this.btnDtDec.Click += new System.EventHandler(this.btnDtDec_Click_1);
             // 
             // btnDtInc
             // 
@@ -463,7 +463,6 @@
             this.btnRefresh.TabIndex = 44;
             this.btnRefresh.Text = "Aktualisieren";
             this.btnRefresh.UseVisualStyleBackColor = true;
-
             // 
             // tabClTxt
             // 

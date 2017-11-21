@@ -94,8 +94,8 @@ namespace SwisstransportGUI
 
             foreach (Control c in gBoxAdvSearch.Controls)
             {
-                if ((c is CheckBox) && (((CheckBox)c).Tag == "childZug" || ((CheckBox)c).Tag == "anotherChb"))
-                {
+                if ((c is CheckBox) && (((CheckBox)c).Tag.ToString() == "childZug" || ((CheckBox)c).Tag.ToString() == "anotherChb"))
+                    {
 
                     if (!((CheckBox)c).Checked)
                     {
@@ -115,7 +115,7 @@ namespace SwisstransportGUI
 
                 foreach (Control c in gBoxAdvSearch.Controls)
                 {
-                    if ((c is CheckBox) && (((CheckBox)c).Tag == "childZug" || ((CheckBox)c).Tag == "anotherChb"))
+                    if ((c is CheckBox) && (((CheckBox)c).Tag.ToString() == "childZug" || ((CheckBox)c).Tag.ToString() == "anotherChb"))
                     {
                         if (((CheckBox)c).Checked)
                         {
@@ -296,7 +296,7 @@ namespace SwisstransportGUI
             {
 
                 string platformNr = boardList.Entries[i].Stop.Platform;
-                string journeyNr = "";
+               
                 string journeyCat = "";
                 int? delay = 0;
                 if (boardList.Entries[i].Stop.Delay!=null) { 
@@ -473,7 +473,7 @@ namespace SwisstransportGUI
         Decimal M_OldValue = 0;
         private void ListBoxListener(object sender, System.Windows.Forms.KeyEventArgs e)
         {
-            if (listResult.Visible = true)
+            if (listResult.Visible == true)
             {
                 if ( e.KeyCode == Keys.Enter) {
 
@@ -567,7 +567,7 @@ namespace SwisstransportGUI
             {
                 foreach (Control c in gBoxAdvSearch.Controls)
                 {
-                    if ((c is CheckBox) && ((CheckBox)c).Tag == "childZug")
+                    if ((c is CheckBox) && ((CheckBox)c).Tag.ToString() == "childZug")
                     {
                         
                         ((CheckBox)c).Checked = true;
@@ -579,7 +579,7 @@ namespace SwisstransportGUI
             {
                 foreach (Control c in gBoxAdvSearch.Controls)
                 {
-                    if ((c is CheckBox) && ((CheckBox)c).Tag == "childZug")
+                    if ((c is CheckBox) && ((CheckBox)c).Tag.ToString() == "childZug")
                     {
                      
                         ((CheckBox)c).Checked = false;
@@ -779,12 +779,17 @@ namespace SwisstransportGUI
             }
             catch (FormatException ex)
             {
-                MessageBox.Show("Bitte korrigieren Sie die Email Adresse");
+                MessageBox.Show("Bitte korrigieren Sie die Email Adressee");
+                Console.Write(ex);
             }
 
 
         }
 
+        private void btnDtDec_Click_1(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
